@@ -1,0 +1,101 @@
+body {
+  font-size: var(--dyvo-text-medium-font-size);
+  line-height: var(--dyvo-text-medium-line-height);
+}
+
+:root {
+  --vp-c-text-1: #3c3c43;
+  --vp-c-text-2: color-mix(in srgb, var(--vp-c-text-1) 75%, var(--vp-c-bg) 25%);
+  --vp-c-text-3: color-mix(in srgb, var(--vp-c-text-1) 55%, var(--vp-c-bg) 45%);
+  --vp-c-text-soft: color-mix(in srgb, var(--vp-c-text-1) 12%, transparent);
+  --vp-c-gray-1: #6e6e73;
+  --vp-c-gray-2: color-mix(in srgb, var(--vp-c-gray-1) 75%, var(--vp-c-bg) 25%);
+  --vp-c-gray-3: color-mix(in srgb, var(--vp-c-gray-1) 55%, var(--vp-c-bg) 45%);
+  --vp-c-gray-soft: color-mix(in srgb, var(--vp-c-gray-1) 12%, transparent);
+  --vp-c-indigo-1: #3451b2;
+  --vp-c-indigo-2: color-mix(in srgb, var(--vp-c-indigo-1) 75%, var(--vp-c-bg) 25%);
+  --vp-c-indigo-3: color-mix(in srgb, var(--vp-c-indigo-1) 55%, var(--vp-c-bg) 45%);
+  --vp-c-indigo-soft: color-mix(in srgb, var(--vp-c-indigo-1) 12%, transparent);
+  --vp-c-purple-1: #6f42c1;
+  --vp-c-purple-2: color-mix(in srgb, var(--vp-c-purple-1) 75%, var(--vp-c-bg) 25%);
+  --vp-c-purple-3: color-mix(in srgb, var(--vp-c-purple-1) 55%, var(--vp-c-bg) 45%);
+  --vp-c-purple-soft: color-mix(in srgb, var(--vp-c-purple-1) 12%, transparent);
+  --vp-c-green-1: #18794e;
+  --vp-c-green-2: color-mix(in srgb, var(--vp-c-green-1) 75%, var(--vp-c-bg) 25%);
+  --vp-c-green-3: color-mix(in srgb, var(--vp-c-green-1) 55%, var(--vp-c-bg) 45%);
+  --vp-c-green-soft: color-mix(in srgb, var(--vp-c-green-1) 12%, transparent);
+  --vp-c-yellow-1: #d68000;
+  --vp-c-yellow-2: color-mix(in srgb, var(--vp-c-yellow-1) 75%, var(--vp-c-bg) 25%);
+  --vp-c-yellow-3: color-mix(in srgb, var(--vp-c-yellow-1) 55%, var(--vp-c-bg) 45%);
+  --vp-c-yellow-soft: color-mix(in srgb, var(--vp-c-yellow-1) 12%, transparent);
+  --vp-c-red-1: #b8272c;
+  --vp-c-red-2: color-mix(in srgb, var(--vp-c-red-1) 75%, var(--vp-c-bg) 25%);
+  --vp-c-red-3: color-mix(in srgb, var(--vp-c-red-1) 55%, var(--vp-c-bg) 45%);
+  --vp-c-red-soft: color-mix(in srgb, var(--vp-c-red-1) 12%, transparent);
+
+  --dyvo-text-medium-font-size: 16px;
+  --dyvo-text-medium-line-height: 24px;
+  --dyvo-text-large-font-size: 18px;
+  --dyvo-text-large-line-height: 28px;
+  --dyvo-text-xlarge-font-size: 20px;
+  --dyvo-text-xlarge-line-height: 28px;
+  --dyvo-text-small-font-size: 14px;
+  --dyvo-text-small-line-height: 20px;
+  --dyvo-text-xsmall-font-size: 12px;
+  --dyvo-text-xsmall-line-height: 16px;
+}
+
+.dark {
+  --vp-c-text-1: #dfdfd6;
+  --vp-c-gray-1: #515c67;
+  --vp-c-indigo-1: #a8b1ff;
+  --vp-c-purple-1: #c8abfa;
+  --vp-c-green-1: #3dd68c;
+  --vp-c-yellow-1: #f7c85d;
+  --vp-c-red-1: #f66f81;
+}
+
+.VPNavBarTitle .logo {
+  background: transparent !important;
+  height: 40px;
+  position: relative;
+  left: -7px;
+}
+
+.VPSidebarItem.level-0:not(.is-link) > .item > .text {
+  margin-bottom: 2px;
+  padding: 0;
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.VPDocAsideOutline .VPDocOutlineItem.nested {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.VPDocAsideOutline .outline-title {
+  margin-bottom: 2px;
+  line-height: 32px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.VPLocalNavOutlineDropdown .VPDocOutlineItem.nested {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.VPDocAsideOutline .outline-link {
+  padding-left: 0 !important;
+}
+
+.VPLocalNavOutlineDropdown .outline {
+  padding-left: 16px !important;
+  padding-right: 16px !important;
+}
+
+.VPLocalNavOutlineDropdown .outline-link {
+  padding-left: 0 !important;
+}

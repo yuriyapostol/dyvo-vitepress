@@ -1,0 +1,8 @@
+export { default as NewsArchiveLinks } from './NewsArchiveLinks.vue'
+export { default as NewsList } from './NewsList.vue'
+export { default as NewsMeta } from './NewsMeta.vue'
+export { default as NewsMetaAuthors } from './NewsMetaAuthors.vue'
+export { default as NewsMetaPublishedAt } from './NewsMetaPublishedAt.vue'
+export { default as NewsMetaStatuses } from './NewsMetaStatuses.vue'
+export type { NewsThemeConfig, NewsThemeLabels } from './config'
+export { formatNewsLabel, useNewsConfig } from './config'
