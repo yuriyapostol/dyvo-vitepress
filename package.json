@@ -21,15 +21,16 @@
     },
     "./theme/config": {
       "types": "./src/theme/config.ts",
-      "import": "./src/theme/config.ts"
+      "import": "./dist/theme/config.js"
     },
     "./shared/i18n": {
       "types": "./src/shared/i18n.ts",
-      "import": "./src/shared/i18n.ts"
+      "import": "./dist/shared/i18n.js"
     }
   },
   "files": [
-    "src"
+    "src",
+    "dist"
   ],
   "scripts": {
     "build": "npm run build:types",
