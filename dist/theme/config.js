@@ -1,3 +1,3 @@
 export function defineThemeConfig(config) {
-  return config
+    return config;
 }

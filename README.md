@@ -16,14 +16,14 @@ The current package includes:
 - opt-in `comments` feature
 - opt-in `news` feature
 
-## Current integration model
+## Integration model
 
-The package is currently intended to be consumed in two stages:
+The package can be consumed in two ways:
 
 1. locally through a `file:` dependency during development
-2. later through a GitHub git dependency pinned to a specific tag or commit SHA
+2. through a GitHub git dependency pinned to a specific tag or commit SHA for shared use
 
-The package currently exports source files from `src/` on purpose. This keeps local iteration simple while the package API is still being stabilized.
+The package still exports theme and feature source files from `src/` on purpose so local iteration stays simple. Config-safe runtime helpers are built into `dist/`.
 
 ## Public API
 
@@ -35,12 +35,13 @@ Primary exports:
 
 Config-safe subpath exports:
 
+- `@yuriyapostol/dyvo-vitepress/config`
 - `@yuriyapostol/dyvo-vitepress/theme/config`
 - `@yuriyapostol/dyvo-vitepress/shared/i18n`
 - `@yuriyapostol/dyvo-vitepress/features/comments`
 - `@yuriyapostol/dyvo-vitepress/features/news`
 
-Use the TS-only subpath exports from VitePress config files when you need to avoid importing `.vue` files during Node-side config loading.
+Use the config-safe subpath exports from VitePress config files when you need to avoid importing `.vue` files during Node-side config loading.
 
 ## Compatibility
 
@@ -69,6 +70,24 @@ Build the package documentation site:
 ```bash
 npm run docs:build
 ```
+
+Build package runtime artifacts for config-safe helpers:
+
+```bash
+npm run build
+```
+
+## Release flow
+
+For a git-tagged release:
+
+1. update package code
+2. run `npm run build`
+3. commit the generated `dist/` changes
+4. bump `package.json.version`
+5. create and push a matching tag such as `v0.1.2`
+
+Consuming sites should then update the dependency reference to that exact tag and refresh their lockfile.
 
 ## Documentation
 
