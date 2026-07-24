@@ -30,7 +30,6 @@ The package still exports theme and feature source files from `src/` on purpose 
 Primary exports:
 
 - `theme`
-- `createConfig`
 - `defineThemeConfig`
 
 Config-safe subpath exports:

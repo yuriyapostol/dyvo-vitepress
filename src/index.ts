@@ -1,7 +1,6 @@
 export { default as theme } from './theme/index.ts'
 export type { ThemeConfig, Sidebar, SidebarItem } from './theme/config.ts'
 export { defineThemeConfig } from './theme/config.ts'
-export { createConfig } from './config/createConfig.ts'
 export { toOpenGraphLocale } from './shared/i18n.ts'
 export { default as Comments } from './features/comments/Comments.vue'
 export { useCommentsConfig } from './features/comments/config.ts'
