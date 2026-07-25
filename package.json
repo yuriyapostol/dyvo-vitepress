@@ -1,6 +1,6 @@
 {
   "name": "@yuriyapostol/dyvo-vitepress",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Reusable VitePress theme, features, and utilities",
   "license": "MIT",
   "type": "module",
