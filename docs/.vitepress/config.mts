@@ -8,33 +8,30 @@ export default defineConfig({
   cleanUrls: true,
   themeConfig: {
     nav: [
-      { text: 'Guide', link: '/getting-started' },
-      { text: 'Architecture', link: '/architecture' }
+      { text: 'Guide', link: '/getting-started' }
     ],
     sidebar: [
       {
         text: 'Guide',
         items: [
           { text: 'Getting Started', link: '/getting-started' },
-          { text: 'Architecture', link: '/architecture' },
-          { text: 'Specification', link: '/specification' }
+          { text: 'Installation', link: '/installation' },
+          { text: 'Configuration', link: '/configuration' }
         ]
       },
       {
-        text: 'Usage',
+        text: 'Components',
         items: [
-          { text: 'Installation', link: '/usage/installation' },
-          { text: 'Configuration', link: '/usage/configuration' },
-          { text: 'Theme', link: '/usage/theme' },
-          { text: 'Comments', link: '/usage/comments' },
-          { text: 'News', link: '/usage/news' }
+          { text: 'Badges', link: '/components/badges' },
+          { text: 'Theme', link: '/components/theme' },
+          { text: 'Comments', link: '/components/comments' },
+          { text: 'News', link: '/components/news' }
         ]
       },
       {
         text: 'Development',
         items: [
-          { text: 'Local Development', link: '/development/local-development' },
-          { text: 'Upstream Strategy', link: '/development/upstream-strategy' }
+          { text: 'Specification', link: '/specification' }
         ]
       }
     ]
@@ -46,33 +43,30 @@ export default defineConfig({
       link: '/',
       themeConfig: {
         nav: [
-          { text: 'Guide', link: '/getting-started' },
-          { text: 'Architecture', link: '/architecture' }
+          { text: 'Guide', link: '/getting-started' }
         ],
         sidebar: [
           {
             text: 'Guide',
             items: [
               { text: 'Getting Started', link: '/getting-started' },
-              { text: 'Architecture', link: '/architecture' },
-              { text: 'Specification', link: '/specification' }
+              { text: 'Installation', link: '/installation' },
+              { text: 'Configuration', link: '/configuration' }
             ]
           },
           {
-            text: 'Usage',
+            text: 'Components',
             items: [
-              { text: 'Installation', link: '/usage/installation' },
-              { text: 'Configuration', link: '/usage/configuration' },
-              { text: 'Theme', link: '/usage/theme' },
-              { text: 'Comments', link: '/usage/comments' },
-              { text: 'News', link: '/usage/news' }
+              { text: 'Badges', link: '/components/badges' },
+              { text: 'Theme', link: '/components/theme' },
+              { text: 'Comments', link: '/components/comments' },
+              { text: 'News', link: '/components/news' }
             ]
           },
           {
             text: 'Development',
             items: [
-              { text: 'Local Development', link: '/development/local-development' },
-              { text: 'Upstream Strategy', link: '/development/upstream-strategy' }
+              { text: 'Specification', link: '/specification' }
             ]
           }
         ]
@@ -84,33 +78,30 @@ export default defineConfig({
       link: '/uk/',
       themeConfig: {
         nav: [
-          { text: 'Посібник', link: '/uk/getting-started' },
-          { text: 'Архітектура', link: '/uk/architecture' }
+          { text: 'Посібник', link: '/uk/getting-started' }
         ],
         sidebar: [
           {
             text: 'Посібник',
             items: [
               { text: 'Початок роботи', link: '/uk/getting-started' },
-              { text: 'Архітектура', link: '/uk/architecture' },
-              { text: 'Специфікація', link: '/uk/specification' }
+              { text: 'Встановлення', link: '/uk/installation' },
+              { text: 'Конфігурація', link: '/uk/configuration' }
             ]
           },
           {
-            text: 'Використання',
+            text: 'Компоненти',
             items: [
-              { text: 'Встановлення', link: '/uk/usage/installation' },
-              { text: 'Конфігурація', link: '/uk/usage/configuration' },
-              { text: 'Тема', link: '/uk/usage/theme' },
-              { text: 'Коментарі', link: '/uk/usage/comments' },
-              { text: 'Новини', link: '/uk/usage/news' }
+              { text: 'Бейджі', link: '/uk/components/badges' },
+              { text: 'Тема', link: '/uk/components/theme' },
+              { text: 'Коментарі', link: '/uk/components/comments' },
+              { text: 'Новини', link: '/uk/components/news' }
             ]
           },
           {
             text: 'Розробка',
             items: [
-              { text: 'Локальна розробка', link: '/uk/development/local-development' },
-              { text: 'Стратегія щодо upstream', link: '/uk/development/upstream-strategy' }
+              { text: 'Специфікація', link: '/uk/specification' }
             ]
           }
         ]

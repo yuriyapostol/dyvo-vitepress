@@ -214,16 +214,13 @@ Subpath exports варто додавати лише тоді, коли для �
 docs/
   index.md
   getting-started.md
-  architecture.md
-  usage/
-    installation.md
-    configuration.md
+  installation.md
+  configuration.md
+  specification.md
+  components/
     theme.md
     comments.md
     news.md
-  development/
-    local-development.md
-    upstream-strategy.md
 ```
 
 Сайт документації може використовувати сам пакет для dogfooding.

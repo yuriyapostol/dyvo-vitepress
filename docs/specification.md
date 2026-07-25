@@ -199,16 +199,13 @@ But consumers should install only the published package artifacts, not the docs 
 docs/
   index.md
   getting-started.md
-  architecture.md
-  usage/
-    installation.md
-    configuration.md
+  installation.md
+  configuration.md
+  specification.md
+  components/
     theme.md
     comments.md
     news.md
-  development/
-    local-development.md
-    upstream-strategy.md
 ```
 
 The docs site may use the package itself for dogfooding.
