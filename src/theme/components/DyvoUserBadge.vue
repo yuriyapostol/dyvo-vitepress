@@ -79,7 +79,7 @@ const resolvedText = computed(() => {
     :color="color"
     :variant="variant"
     :size="size"
-    :image="resolvedAvatarSrc"
+    :image-src="resolvedAvatarSrc"
     :image-alt="resolvedAvatarAlt"
     :href="resolvedHref"
     :clickable="clickable"

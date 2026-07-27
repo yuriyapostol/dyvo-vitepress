@@ -2,7 +2,7 @@
 
 The theme provides two custom badge components:
 
-- `DyvoBadge` for generic labeled badges with variants, sizes, optional image, and optional link behavior.
+- `DyvoBadge` for generic labeled badges with variants, sizes, optional image slot, and optional link behavior.
 - `DyvoUserBadge` for person or contributor badges with a name, avatar, and optional GitHub profile integration.
 
 Because the theme extends the VitePress default theme, the original VitePress `Badge` remains available too.
@@ -24,7 +24,7 @@ Because the theme extends the VitePress default theme, the original VitePress `B
 - colors: `info`, `tip`, `warning`, `danger`, `success`;
 - variants: `soft`, `accent`, `solid`, `outline`, `plain`;
 - sizes: `small`, `medium`, `large`;
-- optional image via `image` and `imageAlt`;
+- optional image via the `image` slot and `imageSrc` / `imageAlt`;
 - optional link via `href`;
 - interactive state via `clickable`;
 - disabled state via `disabled`.
@@ -35,14 +35,24 @@ Example:
   <DyvoBadge text="Stable" color="success" variant="soft" />
   <DyvoBadge text="Experimental" color="warning" variant="outline" />
   <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
-  <DyvoBadge text="With icon" image="/logo.svg" image-alt="Project logo" />
+  <DyvoBadge text="With image" image-src="/logo.svg" image-alt="Project logo" />
+  <DyvoBadge text="Custom slot" image-alt="Project logo">
+    <template #image>
+      <img src="/logo.svg" alt="Project logo" />
+    </template>
+  </DyvoBadge>
 </div>
 
 ```md
 <DyvoBadge text="Stable" color="success" variant="soft" />
 <DyvoBadge text="Experimental" color="warning" variant="outline" />
 <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
-<DyvoBadge text="With icon" image="/logo.svg" image-alt="Project logo" />
+<DyvoBadge text="With image" image-src="/logo.svg" image-alt="Project logo" />
+<DyvoBadge text="Custom slot" image-alt="Project logo">
+  <template #image>
+    <img src="/logo.svg" alt="Project logo" />
+  </template>
+</DyvoBadge>
 ```
 
 You can also pass the label through the default slot:
@@ -54,6 +64,8 @@ You can also pass the label through the default slot:
 ```md
 <DyvoBadge color="tip" variant="solid">Featured</DyvoBadge>
 ```
+
+For backward compatibility, string URLs passed through `image` still work, but `imageSrc` is now the explicit prop for image URLs.
 
 ## `DyvoUserBadge`
 

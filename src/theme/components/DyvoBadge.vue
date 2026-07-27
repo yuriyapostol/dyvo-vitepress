@@ -31,6 +31,7 @@ const props = withDefaults(defineProps<{
   variant?: DyvoBadgeVariant
   size?: DyvoBadgeSize
   image?: string
+  imageSrc?: string
   imageAlt?: string
   href?: string
   clickable?: boolean
@@ -41,6 +42,7 @@ const props = withDefaults(defineProps<{
   variant: 'soft',
   size: 'medium',
   image: '',
+  imageSrc: '',
   imageAlt: '',
   href: undefined,
   clickable: false,
@@ -103,6 +105,18 @@ const tagName = computed(() => {
 const isInteractive = computed(() => (
   (Boolean(props.href) || props.clickable || forcedInteractive.value) && !resolvedDisabled.value
 ))
+
+const resolvedImageSrc = computed(() => {
+  if (typeof props.imageSrc === 'string' && props.imageSrc.trim()) {
+    return props.imageSrc.trim()
+  }
+
+  if (typeof props.image === 'string' && props.image.trim()) {
+    return props.image.trim()
+  }
+
+  return ''
+})
 </script>
 
 <template>
@@ -122,9 +136,9 @@ const isInteractive = computed(() => (
     :href="tagName === 'a' ? href : undefined"
     :aria-disabled="resolvedDisabled || undefined"
   >
-    <span v-if="image || $slots.image" class="dyvo-badge-image" aria-hidden="true">
+    <span v-if="resolvedImageSrc || $slots.image" class="dyvo-badge-image" aria-hidden="true">
       <slot name="image">
-        <img :src="image" :alt="imageAlt" />
+        <img :src="resolvedImageSrc" :alt="imageAlt" />
       </slot>
     </span>
     <span class="dyvo-badge-label">

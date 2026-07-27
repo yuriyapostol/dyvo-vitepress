@@ -2,7 +2,7 @@
 
 Тема надає два кастомні компоненти бейджів:
 
-- `DyvoBadge` для універсальних бейджів з підписом, варіантами оформлення, розмірами, опційним зображенням і посиланням.
+- `DyvoBadge` для універсальних бейджів з підписом, варіантами оформлення, розмірами, опційним слотом зображення і посиланням.
 - `DyvoUserBadge` для бейджів користувача або автора з ім’ям, аватаром і опційною інтеграцією з GitHub-профілем.
 
 Оскільки тема розширює стандартну тему VitePress, оригінальний `Badge` з VitePress теж лишається доступним.
@@ -24,7 +24,7 @@
 - кольори: `info`, `tip`, `warning`, `danger`, `success`;
 - варіанти: `soft`, `accent`, `solid`, `outline`, `plain`;
 - розміри: `small`, `medium`, `large`;
-- опційне зображення через `image` та `imageAlt`;
+- опційне зображення через слот `image` і `imageSrc` / `imageAlt`;
 - опційне посилання через `href`;
 - інтерактивний стан через `clickable`;
 - вимкнений стан через `disabled`.
@@ -35,14 +35,24 @@
   <DyvoBadge text="Стабільно" color="success" variant="soft" />
   <DyvoBadge text="Експериментально" color="warning" variant="outline" />
   <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
-  <DyvoBadge text="З іконкою" image="/logo.svg" image-alt="Логотип проєкту" />
+  <DyvoBadge text="З зображенням" image-src="/logo.svg" image-alt="Логотип проєкту" />
+  <DyvoBadge text="Кастомний слот" image-alt="Логотип проєкту">
+    <template #image>
+      <img src="/logo.svg" alt="Логотип проєкту" />
+    </template>
+  </DyvoBadge>
 </div>
 
 ```md
 <DyvoBadge text="Стабільно" color="success" variant="soft" />
 <DyvoBadge text="Експериментально" color="warning" variant="outline" />
 <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
-<DyvoBadge text="З іконкою" image="/logo.svg" image-alt="Логотип проєкту" />
+<DyvoBadge text="З зображенням" image-src="/logo.svg" image-alt="Логотип проєкту" />
+<DyvoBadge text="Кастомний слот" image-alt="Логотип проєкту">
+  <template #image>
+    <img src="/logo.svg" alt="Логотип проєкту" />
+  </template>
+</DyvoBadge>
 ```
 
 Підпис можна передавати і через default slot:
@@ -54,6 +64,8 @@
 ```md
 <DyvoBadge color="tip" variant="solid">Рекомендовано</DyvoBadge>
 ```
+
+Для зворотної сумісності рядкове URL-значення в `image` теж працює, але явний проп для адреси зображення тепер `imageSrc`.
 
 ## `DyvoUserBadge`
 
