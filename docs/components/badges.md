@@ -35,10 +35,10 @@ Example:
   <DyvoBadge text="Stable" color="success" variant="soft" />
   <DyvoBadge text="Experimental" color="warning" variant="outline" />
   <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
-  <DyvoBadge text="With image" image-src="/logo.svg" image-alt="Project logo" />
+  <DyvoBadge text="With image" image-src="https://github.com/yuriyapostol.png?size=80" image-alt="Project logo" />
   <DyvoBadge text="Custom slot" image-alt="Project logo">
     <template #image>
-      <img src="/logo.svg" alt="Project logo" />
+      <img src="https://github.com/yuriyapostol.png?size=80" alt="Project logo" />
     </template>
   </DyvoBadge>
 </div>
@@ -47,10 +47,10 @@ Example:
 <DyvoBadge text="Stable" color="success" variant="soft" />
 <DyvoBadge text="Experimental" color="warning" variant="outline" />
 <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
-<DyvoBadge text="With image" image-src="/logo.svg" image-alt="Project logo" />
+<DyvoBadge text="With image" image-src="https://github.com/yuriyapostol.png?size=80" image-alt="Project logo" />
 <DyvoBadge text="Custom slot" image-alt="Project logo">
   <template #image>
-    <img src="/logo.svg" alt="Project logo" />
+    <img src="https://github.com/yuriyapostol.png?size=80" alt="Project logo" />
   </template>
 </DyvoBadge>
 ```
@@ -92,7 +92,7 @@ Examples:
   <DyvoUserBadge
     name="Project maintainer"
     text="Maintainer"
-    avatar-src="/logo.svg"
+    avatar-src="https://github.com/yuriyapostol.png?size=80"
     href="https://example.com/team/yuriy"
     color="tip"
     variant="accent"
@@ -104,7 +104,7 @@ Examples:
 <DyvoUserBadge
   name="Project maintainer"
   text="Maintainer"
-  avatar-src="/logo.svg"
+  avatar-src="https://github.com/yuriyapostol.png?size=80"
   href="https://example.com/team/yuriy"
   color="tip"
   variant="accent"

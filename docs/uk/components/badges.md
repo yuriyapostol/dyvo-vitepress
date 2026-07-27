@@ -35,10 +35,10 @@
   <DyvoBadge text="Стабільно" color="success" variant="soft" />
   <DyvoBadge text="Експериментально" color="warning" variant="outline" />
   <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
-  <DyvoBadge text="З зображенням" image-src="/logo.svg" image-alt="Логотип проєкту" />
+  <DyvoBadge text="З зображенням" image-src="https://github.com/yuriyapostol.png?size=80" image-alt="Логотип проєкту" />
   <DyvoBadge text="Кастомний слот" image-alt="Логотип проєкту">
     <template #image>
-      <img src="/logo.svg" alt="Логотип проєкту" />
+      <img src="https://github.com/yuriyapostol.png?size=80" alt="Логотип проєкту" />
     </template>
   </DyvoBadge>
 </div>
@@ -47,10 +47,10 @@
 <DyvoBadge text="Стабільно" color="success" variant="soft" />
 <DyvoBadge text="Експериментально" color="warning" variant="outline" />
 <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
-<DyvoBadge text="З зображенням" image-src="/logo.svg" image-alt="Логотип проєкту" />
+<DyvoBadge text="З зображенням" image-src="https://github.com/yuriyapostol.png?size=80" image-alt="Логотип проєкту" />
 <DyvoBadge text="Кастомний слот" image-alt="Логотип проєкту">
   <template #image>
-    <img src="/logo.svg" alt="Логотип проєкту" />
+    <img src="https://github.com/yuriyapostol.png?size=80" alt="Логотип проєкту" />
   </template>
 </DyvoBadge>
 ```
@@ -92,7 +92,7 @@
   <DyvoUserBadge
     name="Project maintainer"
     text="Maintainer"
-    avatar-src="/logo.svg"
+    avatar-src="https://github.com/yuriyapostol.png?size=80"
     href="https://example.com/team/yuriy"
     color="tip"
     variant="accent"
@@ -104,7 +104,7 @@
 <DyvoUserBadge
   name="Project maintainer"
   text="Maintainer"
-  avatar-src="/logo.svg"
+  avatar-src="https://github.com/yuriyapostol.png?size=80"
   href="https://example.com/team/yuriy"
   color="tip"
   variant="accent"
