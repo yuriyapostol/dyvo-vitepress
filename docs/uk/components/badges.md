@@ -21,7 +21,7 @@
 `DyvoBadge` підтримує:
 
 - текст через проп `text` або default slot;
-- кольори: `info`, `tip`, `warning`, `danger`, `success`;
+- кольори через `color`: `info`, `tip`, `warning`, `danger`, `success`;
 - варіанти: `soft`, `accent`, `solid`, `outline`, `plain`;
 - розміри: `small`, `medium`, `large`;
 - опційне зображення через слот `image` і `imageSrc` / `imageAlt`;
@@ -113,23 +113,55 @@
 
 ## Порівняння з `Badge` у VitePress
 
-Використовуй вбудований `Badge` з VitePress, коли потрібен невеликий inline-маркер всередині тексту, наприклад:
+`DyvoBadge` проєктувався так, щоб лишатися сумісним із типовими сценаріями використання стандартного `Badge` з VitePress, але водночас давати ширші можливості стилізації, посилань, розмірів і зображень.
+
+Тому немає потреби змішувати `Badge` і `DyvoBadge` в одній документації, якщо ти не хочеш свідомо підтримувати дві різні візуальні системи.
+
+Якщо потрібен один універсальний компонент, `DyvoBadge` можна використовувати і для простих inline-маркерів:
 
 <div style="margin: 16px 0;">
-  API Reference <Badge type="tip" text="stable" />
+  API Reference <DyvoBadge color="tip" variant="soft" size="small" text="stable" />
 </div>
 
 ```md
-API Reference <Badge type="tip" text="stable" />
+API Reference <DyvoBadge color="tip" variant="soft" size="small" text="stable" />
 ```
 
 Використовуй `DyvoBadge`, коли потрібні:
 
+- один консистентний стиль бейджів по всьому сайту;
+- сумісність із простими inline-бейджами;
 - більші візуальні варіанти;
 - поведінка клікабельного бейджа;
 - підтримка зображень;
 - явне керування розміром;
 - pill-like компонент, який може стояти окремо в контенті.
+
+Якщо в markdown уже використовується стандартний `Badge` з VitePress, рекомендований шлях міграції — підключити окремий compatibility-wrapper, а не розширювати `DyvoBadge` legacy-пропсами.
+
+Для цього пакет експортує компонент `Badge`, але він не реєструється автоматично. Його можна підключити вручну у своїй темі:
+
+```ts
+import DefaultTheme from 'vitepress/theme'
+import type { Theme } from 'vitepress'
+import { Badge, theme as dyvoTheme } from '@yuriyapostol/dyvo-vitepress'
+
+const theme: Theme = {
+  extends: dyvoTheme,
+  enhanceApp(ctx) {
+    dyvoTheme.enhanceApp?.(ctx)
+    ctx.app.component('Badge', Badge)
+  }
+}
+
+export default theme
+```
+
+Такий wrapper зберігає VitePress-style API з пропом `type` і передає його в `DyvoBadge` через `color`, тому існуючий markdown може й далі використовувати, наприклад:
+
+```md
+API Reference <Badge type="tip" text="stable" />
+```
 
 Використовуй `DyvoUserBadge`, коли потрібні:
 
@@ -139,6 +171,5 @@ API Reference <Badge type="tip" text="stable" />
 
 Коротко:
 
-- `Badge` з VitePress — простіший inline-примітив.
-- `DyvoBadge` — гнучкіший theme-level бейдж.
+- `DyvoBadge` може одночасно виконувати роль і простого inline-бейджа, і більш потужного theme-level бейджа.
 - `DyvoUserBadge` — спеціалізований бейдж автора поверх `DyvoBadge`.

@@ -6,6 +6,7 @@ export declare const theme: import('vitepress').Theme
 export declare function defineThemeConfig<T = ThemeConfig>(config: T): T
 export declare function toOpenGraphLocale(locale: string): string
 
+export declare const Badge: any
 export declare const Comments: any
 export declare function useCommentsConfig(): any
 

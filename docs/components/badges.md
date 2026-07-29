@@ -21,7 +21,7 @@ Because the theme extends the VitePress default theme, the original VitePress `B
 `DyvoBadge` supports:
 
 - text via `text` prop or default slot;
-- colors: `info`, `tip`, `warning`, `danger`, `success`;
+- colors via `color`: `info`, `tip`, `warning`, `danger`, `success`;
 - variants: `soft`, `accent`, `solid`, `outline`, `plain`;
 - sizes: `small`, `medium`, `large`;
 - optional image via the `image` slot and `imageSrc` / `imageAlt`;
@@ -113,23 +113,55 @@ Examples:
 
 ## Comparison With VitePress `Badge`
 
-Use VitePress `Badge` when you only need a small status marker inside prose, for example:
+`DyvoBadge` was designed to stay compatible with the default VitePress `Badge` use cases while extending them with richer styling, links, sizing, and optional images.
+
+That means you do not need to mix `Badge` and `DyvoBadge` across the same docs set unless you explicitly want two different visual systems.
+
+If you prefer a single badge component everywhere, use `DyvoBadge` for inline markers too:
 
 <div style="margin: 16px 0;">
-  API Reference <Badge type="tip" text="stable" />
+  API Reference <DyvoBadge color="tip" variant="soft" size="small" text="stable" />
 </div>
 
 ```md
-API Reference <Badge type="tip" text="stable" />
+API Reference <DyvoBadge color="tip" variant="soft" size="small" text="stable" />
 ```
 
-Use `DyvoBadge` when you need:
+Use `DyvoBadge` when you want:
 
-- larger visual variants;
+- one consistent badge style across the site;
+- compatibility with simple inline badge usage;
+- larger visual variants when needed;
 - clickable badge behavior;
 - image support;
 - more explicit sizing;
 - a pill-like component that can stand alone in content blocks.
+
+If your markdown already uses VitePress `Badge`, the recommended migration path is to register an optional compatibility wrapper instead of extending `DyvoBadge` with legacy props.
+
+The package exports a `Badge` wrapper component for that purpose, but it is not registered by default. You can connect it manually in your theme:
+
+```ts
+import DefaultTheme from 'vitepress/theme'
+import type { Theme } from 'vitepress'
+import { Badge, theme as dyvoTheme } from '@yuriyapostol/dyvo-vitepress'
+
+const theme: Theme = {
+  extends: dyvoTheme,
+  enhanceApp(ctx) {
+    dyvoTheme.enhanceApp?.(ctx)
+    ctx.app.component('Badge', Badge)
+  }
+}
+
+export default theme
+```
+
+That wrapper keeps the VitePress-style `type` API and forwards it to `DyvoBadge` via `color`, which lets existing markdown keep using:
+
+```md
+API Reference <Badge type="tip" text="stable" />
+```
 
 Use `DyvoUserBadge` when you need:
 
@@ -139,6 +171,5 @@ Use `DyvoUserBadge` when you need:
 
 In short:
 
-- VitePress `Badge` is the simpler inline primitive.
-- `DyvoBadge` is the more flexible theme-level badge.
+- `DyvoBadge` can cover both the simple inline badge role and the more advanced theme-level badge role.
 - `DyvoUserBadge` is a specialized author badge built on top of `DyvoBadge`.
