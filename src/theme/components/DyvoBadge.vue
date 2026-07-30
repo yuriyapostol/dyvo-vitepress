@@ -18,6 +18,8 @@ type DyvoBadgeSize = 'small' | 'medium' | 'large'
 
 type DyvoBadgeState = 'interactive' | 'disabled'
 
+type DyvoBadgeVerticalAlign = 'unset' | 'baseline' | 'middle' | 'super' | 'sub'
+
 const badgeColors = ['info', 'tip', 'warning', 'danger', 'success'] as const
 const badgeVariants = ['soft', 'accent', 'solid', 'outline', 'plain'] as const
 const badgeSizes = ['small', 'medium', 'large'] as const
@@ -30,6 +32,7 @@ const props = withDefaults(defineProps<{
   color?: DyvoBadgeColor
   variant?: DyvoBadgeVariant
   size?: DyvoBadgeSize
+  verticalAlign?: DyvoBadgeVerticalAlign
   image?: string
   imageSrc?: string
   imageAlt?: string
@@ -41,6 +44,7 @@ const props = withDefaults(defineProps<{
   color: 'tip',
   variant: 'soft',
   size: 'medium',
+  verticalAlign: 'unset',
   image: '',
   imageSrc: '',
   imageAlt: '',
@@ -128,6 +132,7 @@ const resolvedImageSrc = computed(() => {
       resolvedColor,
       resolvedVariant,
       resolvedSize,
+      `vertical-align-${verticalAlign}`,
       {
         interactive: isInteractive,
         disabled: resolvedDisabled
@@ -142,13 +147,15 @@ const resolvedImageSrc = computed(() => {
         'has-image': resolvedImageSrc || $slots.image
       }"
     >
-      <span v-if="resolvedImageSrc || $slots.image" class="dyvo-badge-image" aria-hidden="true">
-        <slot name="image">
-          <img :src="resolvedImageSrc" :alt="imageAlt" />
-        </slot>
-      </span>
-      <span class="dyvo-badge-text">
-        <slot>{{ text }}</slot>
+      <span class="dyvo-badge-body">
+        <span v-if="resolvedImageSrc || $slots.image" class="dyvo-badge-image" aria-hidden="true">
+          <slot name="image">
+            <img :src="resolvedImageSrc" :alt="imageAlt" />
+          </slot>
+        </span>
+        <span class="dyvo-badge-text">
+          <slot>{{ text }}</slot>
+        </span>
       </span>
     </span>
   </component>
@@ -159,14 +166,15 @@ const resolvedImageSrc = computed(() => {
   --dyvo-badge-padding-x: var(--dyvo-badge-medium-padding-x, 12px);
   --dyvo-badge-padding-y: var(--dyvo-badge-medium-padding-y, 0);
   --dyvo-badge-gap: var(--dyvo-badge-medium-gap, 6px);
-  --dyvo-badge-line-height: var(--dyvo-badge-medium-line-height, var(--dyvo-text-medium-line-height, 24px));
-  --dyvo-badge-image-size: var(--dyvo-badge-line-height);
+  --dyvo-badge-line-height: var(--dyvo-badge-medium-line-height, inherit);
+  --dyvo-badge-box-height: var(--dyvo-badge-medium-box-height, var(--dyvo-text-medium-line-height, 24px));
+  --dyvo-badge-image-size: var(--dyvo-badge-box-height);
   --dyvo-badge-link-color: var(--dyvo-badge-link-default-color, var(--dyvo-badge-text-color, var(--vp-c-text-1)));
   --dyvo-badge-border-width: 1px;
+  --dyvo-badge-vertical-align: unset;
   --dyvo-badge-image-space: calc(var(--dyvo-badge-image-size) + var(--dyvo-badge-gap));
   display: inline;
   white-space: nowrap;
-  vertical-align: baseline;
   color: var(--dyvo-badge-text-color, var(--vp-c-text-1));
 }
 
@@ -185,7 +193,8 @@ a.dyvo-badge:hover {
   --dyvo-badge-padding-x: var(--dyvo-badge-small-padding-x, 10px);
   --dyvo-badge-padding-y: var(--dyvo-badge-small-padding-y, 0);
   --dyvo-badge-gap: var(--dyvo-badge-small-gap, 5px);
-  --dyvo-badge-line-height: var(--dyvo-badge-small-line-height, var(--dyvo-text-small-line-height, calc(var(--dyvo-text-medium-line-height, 24px) - 4px)));
+  --dyvo-badge-line-height: var(--dyvo-badge-small-line-height, inherit);
+  --dyvo-badge-box-height: var(--dyvo-badge-small-box-height, var(--dyvo-text-small-line-height, calc(var(--dyvo-text-medium-line-height, 24px) - 4px)));
   --dyvo-badge-font-size: var(--dyvo-badge-small-font-size, var(--dyvo-text-xsmall-font-size, calc(var(--dyvo-text-medium-font-size, 16px) - 4px)));
   --dyvo-badge-font-weight: var(--dyvo-badge-small-font-weight, 500);
 }
@@ -194,7 +203,8 @@ a.dyvo-badge:hover {
   --dyvo-badge-padding-x: var(--dyvo-badge-medium-padding-x, 12px);
   --dyvo-badge-padding-y: var(--dyvo-badge-medium-padding-y, 0);
   --dyvo-badge-gap: var(--dyvo-badge-medium-gap, 6px);
-  --dyvo-badge-line-height: var(--dyvo-badge-medium-line-height, var(--dyvo-text-medium-line-height, 24px));
+  --dyvo-badge-line-height: var(--dyvo-badge-medium-line-height, inherit);
+  --dyvo-badge-box-height: var(--dyvo-badge-medium-box-height, var(--dyvo-text-medium-line-height, 24px));
   --dyvo-badge-font-size: var(--dyvo-badge-medium-font-size, var(--dyvo-text-small-font-size, calc(var(--dyvo-text-medium-font-size, 16px) - 2px)));
   --dyvo-badge-font-weight: var(--dyvo-badge-medium-font-weight, 400);
 }
@@ -203,9 +213,36 @@ a.dyvo-badge:hover {
   --dyvo-badge-padding-x: var(--dyvo-badge-large-padding-x, 14px);
   --dyvo-badge-padding-y: var(--dyvo-badge-large-padding-y, 0);
   --dyvo-badge-gap: var(--dyvo-badge-large-gap, 8px);
-  --dyvo-badge-line-height: var(--dyvo-badge-large-line-height, var(--dyvo-text-large-line-height, calc(var(--dyvo-text-medium-line-height, 24px) + 4px)));
+  --dyvo-badge-line-height: var(--dyvo-badge-large-line-height, inherit);
+  --dyvo-badge-box-height: var(--dyvo-badge-large-box-height, var(--dyvo-text-large-line-height, calc(var(--dyvo-text-medium-line-height, 24px) + 4px)));
   --dyvo-badge-font-size: var(--dyvo-badge-large-font-size, var(--dyvo-text-medium-font-size, 16px));
   --dyvo-badge-font-weight: var(--dyvo-badge-large-font-weight, 400);
+}
+
+.dyvo-badge.vertical-align-unset {
+  --dyvo-badge-vertical-align: unset;
+}
+
+.vp-doc h1 > .dyvo-badge.vertical-align-unset,
+.vp-doc h2 > .dyvo-badge.vertical-align-unset,
+.vp-doc h3 > .dyvo-badge.vertical-align-unset{
+  --dyvo-badge-vertical-align: middle;
+}
+
+.dyvo-badge.vertical-align-baseline {
+  --dyvo-badge-vertical-align: baseline;
+}
+
+.dyvo-badge.vertical-align-middle {
+  --dyvo-badge-vertical-align: middle;
+}
+
+.dyvo-badge.vertical-align-super {
+  --dyvo-badge-vertical-align: super;
+}
+
+.dyvo-badge.vertical-align-sub {
+  --dyvo-badge-vertical-align: sub;
 }
 
 .dyvo-badge.interactive {
@@ -230,32 +267,41 @@ a.dyvo-badge:hover {
 }
 
 .dyvo-badge-label {
-  position: relative;
   display: inline-block;
-  padding: var(--dyvo-badge-padding-y) var(--dyvo-badge-padding-x);
-  line-height: var(--dyvo-badge-line-height);
+  line-height: var(--dyvo-badge-line-height, inherit);
   font-size: var(--dyvo-badge-font-size, var(--dyvo-text-small-font-size, calc(var(--dyvo-text-medium-font-size, 16px) - 2px)));
   font-weight: var(--dyvo-badge-font-weight, 400);
   color: inherit;
   text-decoration: inherit;
   text-underline-offset: inherit;
-  vertical-align: middle;
-  isolation: isolate;
+  vertical-align: var(--dyvo-badge-vertical-align);
 }
 
-.dyvo-badge-label::before {
+.dyvo-badge-body {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: var(--dyvo-badge-box-height);
+  padding: var(--dyvo-badge-padding-y) var(--dyvo-badge-padding-x);
+  isolation: isolate;
+  text-decoration: inherit;
+  text-underline-offset: inherit;
+}
+
+.dyvo-badge-body::before {
   content: '';
   position: absolute;
   inset: calc(-1 * var(--dyvo-badge-border-width));
   border: var(--dyvo-badge-border-width) solid var(--dyvo-badge-border-color, transparent);
   border-radius: var(--dyvo-badge-radius, 9999px);
   background-color: var(--dyvo-badge-bg-color, transparent);
+  box-sizing: border-box;
   pointer-events: none;
   z-index: -1;
 }
 
 .dyvo-badge-label.has-image {
-  padding-inline-start: var(--dyvo-badge-image-space);
+  padding-inline-start: 0;
 }
 
 .dyvo-badge-image {
@@ -282,6 +328,7 @@ a.dyvo-badge:hover {
 
 .dyvo-badge-text {
   display: inline;
+  line-height: var(--dyvo-badge-line-height, inherit);
   text-decoration: inherit;
   text-underline-offset: inherit;
 }
@@ -321,11 +368,15 @@ a.dyvo-badge:hover {
 }
 
 .dyvo-badge.plain .dyvo-badge-label.has-image {
+  padding-inline-start: 0;
+}
+
+.dyvo-badge.plain .dyvo-badge-label.has-image .dyvo-badge-body {
   padding-inline-start: var(--dyvo-badge-image-space);
 }
 
-.dyvo-badge.plain .dyvo-badge-image {
-  inset-inline-start: 0;
+.dyvo-badge-label.has-image .dyvo-badge-body {
+  padding-inline-start: var(--dyvo-badge-image-space);
 }
 
 .dyvo-badge.info {
