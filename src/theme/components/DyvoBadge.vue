@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { withBase } from 'vitepress'
 import { computed, normalizeClass, useAttrs } from 'vue'
 
 defineOptions({
@@ -149,12 +150,26 @@ const isInteractive = computed(() => (
 ))
 
 const resolvedImageSrc = computed(() => {
+  const normalizeImageSrc = (value: string) => {
+    const trimmed = value.trim()
+
+    if (!trimmed) {
+      return ''
+    }
+
+    if (trimmed.startsWith('/')) {
+      return withBase(trimmed)
+    }
+
+    return trimmed
+  }
+
   if (typeof props.imageSrc === 'string' && props.imageSrc.trim()) {
-    return props.imageSrc.trim()
+    return normalizeImageSrc(props.imageSrc)
   }
 
   if (typeof props.image === 'string' && props.image.trim()) {
-    return props.image.trim()
+    return normalizeImageSrc(props.image)
   }
 
   return ''

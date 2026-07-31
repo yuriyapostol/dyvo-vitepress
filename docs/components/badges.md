@@ -36,14 +36,14 @@ Example:
   <DyvoBadge text="Stable" color="success" variant="soft" />
   <DyvoBadge text="Experimental" color="warning" variant="outline" />
   <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
-  <DyvoBadge text="With image" image-src="https://github.com/yuriyapostol.png?size=80" image-alt="Project logo" />
+  <DyvoBadge text="With image" image-src="/images/logo.svg" image-alt="Project logo" />
 </div>
 
 ```html
 <DyvoBadge text="Stable" color="success" variant="soft" />
 <DyvoBadge text="Experimental" color="warning" variant="outline" />
 <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
-<DyvoBadge text="With image" image-src="https://github.com/yuriyapostol.png?size=80" image-alt="Project logo" />
+<DyvoBadge text="With image" image-src="/images/logo.svg" image-alt="Project logo" />
 ```
 
 You can also pass the label through the default slot:
@@ -77,15 +77,15 @@ You can add a custom image through the `image` slot:
 Size options:
 
 <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin: 16px 0;">
-  <DyvoBadge size="large" image="https://github.com/yuriyapostol.png?size=80">large</DyvoBadge>
-  <DyvoBadge size="medium" image="https://github.com/yuriyapostol.png?size=80">medium</DyvoBadge>
-  <DyvoBadge size="small" image="https://github.com/yuriyapostol.png?size=80">small</DyvoBadge>
+  <DyvoBadge size="large" image="/images/logo.svg">large</DyvoBadge>
+  <DyvoBadge size="medium" image="/images/logo.svg">medium</DyvoBadge>
+  <DyvoBadge size="small" image="/images/logo.svg">small</DyvoBadge>
 </div>
 
 ```html
-<DyvoBadge size="large" image="https://github.com/yuriyapostol.png?size=80">large</DyvoBadge>
-<DyvoBadge size="medium" image="https://github.com/yuriyapostol.png?size=80">medium</DyvoBadge>
-<DyvoBadge size="small" image="https://github.com/yuriyapostol.png?size=80">small</DyvoBadge>
+<DyvoBadge size="large" image="/images/logo.svg">large</DyvoBadge>
+<DyvoBadge size="medium" image="/images/logo.svg">medium</DyvoBadge>
+<DyvoBadge size="small" image="/images/logo.svg">small</DyvoBadge>
 ```
 
 Compact badges also work well inside headings:

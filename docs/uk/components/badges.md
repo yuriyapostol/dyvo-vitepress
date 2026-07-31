@@ -36,14 +36,14 @@
   <DyvoBadge text="Стабільно" color="success" variant="soft" />
   <DyvoBadge text="Експериментально" color="warning" variant="outline" />
   <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
-  <DyvoBadge text="З зображенням" image-src="https://github.com/yuriyapostol.png?size=80" image-alt="Логотип проєкту" />
+  <DyvoBadge text="З зображенням" image-src="/images/logo.svg" image-alt="Логотип проєкту" />
 </div>
 
 ```html
 <DyvoBadge text="Стабільно" color="success" variant="soft" />
 <DyvoBadge text="Експериментально" color="warning" variant="outline" />
 <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
-<DyvoBadge text="З зображенням" image-src="https://github.com/yuriyapostol.png?size=80" image-alt="Логотип проєкту" />
+<DyvoBadge text="З зображенням" image-src="/images/logo.svg" image-alt="Логотип проєкту" />
 ```
 
 Підпис можна передавати і через default slot:
@@ -77,15 +77,15 @@
 Розміри:
 
 <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin: 16px 0;">
-  <DyvoBadge size="large" image="https://github.com/yuriyapostol.png?size=80">large</DyvoBadge>
-  <DyvoBadge size="medium" image="https://github.com/yuriyapostol.png?size=80">medium</DyvoBadge>
-  <DyvoBadge size="small" image="https://github.com/yuriyapostol.png?size=80">small</DyvoBadge>
+  <DyvoBadge size="large" image="/images/logo.svg">large</DyvoBadge>
+  <DyvoBadge size="medium" image="/images/logo.svg">medium</DyvoBadge>
+  <DyvoBadge size="small" image="/images/logo.svg">small</DyvoBadge>
 </div>
 
 ```html
-<DyvoBadge size="large" image="https://github.com/yuriyapostol.png?size=80">large</DyvoBadge>
-<DyvoBadge size="medium" image="https://github.com/yuriyapostol.png?size=80">medium</DyvoBadge>
-<DyvoBadge size="small" image="https://github.com/yuriyapostol.png?size=80">small</DyvoBadge>
+<DyvoBadge size="large" image="/images/logo.svg">large</DyvoBadge>
+<DyvoBadge size="medium" image="/images/logo.svg">medium</DyvoBadge>
+<DyvoBadge size="small" image="/images/logo.svg">small</DyvoBadge>
 ```
 
 Компактні бейджі також добре працюють у заголовках:
