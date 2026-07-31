@@ -11,7 +11,7 @@
 
 `DyvoBadge` і `DyvoUserBadge` глобально реєструються темою, тому їх можна напряму використовувати в markdown і на Vue-сторінках документації:
 
-```md
+```html
 <DyvoBadge text="Стабільно" />
 <DyvoUserBadge name="Yuriy Apostol" github="yuriyapostol" />
 ```
@@ -24,9 +24,10 @@
 - кольори через `color`: `info`, `tip`, `warning`, `danger`, `success`;
 - варіанти: `soft`, `accent`, `solid`, `outline`, `plain`;
 - розміри: `small`, `medium`, `large`;
-- опційне зображення через слот `image` і `imageSrc` / `imageAlt`;
+- вертикальне вирівнювання через `verticalAlign`: `unset`, `baseline`, `middle`, `super`, `sub`;
+- опційне зображення через параметри `imageSrc` / `imageAlt` або слот `image`;
 - опційне посилання через `href`;
-- інтерактивний стан через `clickable`;
+- інтерактивний стан через `interactive`;
 - вимкнений стан через `disabled`.
 
 Приклад:
@@ -36,23 +37,13 @@
   <DyvoBadge text="Експериментально" color="warning" variant="outline" />
   <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
   <DyvoBadge text="З зображенням" image-src="https://github.com/yuriyapostol.png?size=80" image-alt="Логотип проєкту" />
-  <DyvoBadge text="Кастомний слот" image-alt="Логотип проєкту">
-    <template #image>
-      <img src="https://github.com/yuriyapostol.png?size=80" alt="Логотип проєкту" />
-    </template>
-  </DyvoBadge>
 </div>
 
-```md
+```html
 <DyvoBadge text="Стабільно" color="success" variant="soft" />
 <DyvoBadge text="Експериментально" color="warning" variant="outline" />
 <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
 <DyvoBadge text="З зображенням" image-src="https://github.com/yuriyapostol.png?size=80" image-alt="Логотип проєкту" />
-<DyvoBadge text="Кастомний слот" image-alt="Логотип проєкту">
-  <template #image>
-    <img src="https://github.com/yuriyapostol.png?size=80" alt="Логотип проєкту" />
-  </template>
-</DyvoBadge>
 ```
 
 Підпис можна передавати і через default slot:
@@ -61,94 +52,57 @@
   <DyvoBadge color="tip" variant="solid">Рекомендовано</DyvoBadge>
 </div>
 
-```md
+```html
 <DyvoBadge color="tip" variant="solid">Рекомендовано</DyvoBadge>
 ```
 
-Для зворотної сумісності рядкове URL-значення в `image` теж працює, але явний проп для адреси зображення тепер `imageSrc`.
+Кастомне зображення через слот `image`:
 
-## `DyvoUserBadge`
-
-`DyvoUserBadge` обгортає `DyvoBadge` і додає дефолти для користувача або автора.
-
-Він підтримує:
-
-- обов’язковий `name`;
-- опційний GitHub handle у `github`;
-- опційний `href`, який перевизначає посилання;
-- опційні `avatarSrc` і `avatarAlt`;
-- опційний `text` для перевизначення видимого підпису;
-- ті самі `color`, `variant`, `size`, `clickable` і `disabled`, що й `DyvoBadge`.
-
-Якщо передано `github`:
-
-- посиланням за замовчуванням стає `https://github.com/<handle>`;
-- аватаром за замовчуванням стає `https://github.com/<handle>.png?size=80`.
-
-Приклади:
-
-<div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin: 16px 0;">
-  <DyvoUserBadge name="Yuriy Apostol" github="yuriyapostol" />
-  <DyvoUserBadge
-    name="Project maintainer"
-    text="Maintainer"
-    avatar-src="https://github.com/yuriyapostol.png?size=80"
-    href="https://example.com/team/yuriy"
-    color="tip"
-    variant="accent"
-  />
+<div style="margin: 16px 0;">
+  <DyvoBadge text="Кастомний слот" image-alt="Логотип проєкту">
+    <template #image>
+      <img src="https://avatars.githubusercontent.com/u/252810981?s=64&v=4" alt="Логотип проєкту" />
+    </template>
+  </DyvoBadge>
 </div>
 
-```md
-<DyvoUserBadge name="Yuriy Apostol" github="yuriyapostol" />
-<DyvoUserBadge
-  name="Project maintainer"
-  text="Maintainer"
-  avatar-src="https://github.com/yuriyapostol.png?size=80"
-  href="https://example.com/team/yuriy"
-  color="tip"
-  variant="accent"
-/>
+```html
+<DyvoBadge text="Кастомний слот" image-alt="Логотип проєкту">
+  <template #image>
+    <img src="https://avatars.githubusercontent.com/u/252810981?s=64&v=4" alt="Логотип проєкту" />
+  </template>
+</DyvoBadge>
 ```
 
-## Вітрина бейджів
+Розміри:
 
+<div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin: 16px 0;">
+  <DyvoBadge size="large" image="https://github.com/yuriyapostol.png?size=80">large</DyvoBadge>
+  <DyvoBadge size="medium" image="https://github.com/yuriyapostol.png?size=80">medium</DyvoBadge>
+  <DyvoBadge size="small" image="https://github.com/yuriyapostol.png?size=80">small</DyvoBadge>
+</div>
+
+```html
+<DyvoBadge size="large" image="https://github.com/yuriyapostol.png?size=80">large</DyvoBadge>
+<DyvoBadge size="medium" image="https://github.com/yuriyapostol.png?size=80">medium</DyvoBadge>
+<DyvoBadge size="small" image="https://github.com/yuriyapostol.png?size=80">small</DyvoBadge>
+```
+
+Компактні бейджі також добре працюють у заголовках:
+
+<div style="display:grid; gap:8px; margin:16px 0;">
+  <h1 style="margin:0; padding:0; border:0;">Заголовок першого рівня <DyvoBadge color="info" variant="solid">h1</DyvoBadge></h1>
+  <h2 style="margin:0; padding:0; border:0;">Заголовок другого рівня <DyvoBadge>h2</DyvoBadge></h2>
+  <h3 style="margin:0; padding:0; border:0;">Заголовок третього рівня <DyvoBadge color="warning">h3</DyvoBadge></h3>
+</div>
+
+```html
 # Заголовок першого рівня <DyvoBadge color="info" variant="solid">h1</DyvoBadge>
-
 ## Заголовок другого рівня <DyvoBadge>h2</DyvoBadge>
-
 ### Заголовок третього рівня <DyvoBadge color="warning">h3</DyvoBadge>
+```
 
-<p><DyvoUserBadge name="Юрій Апостол" github="yuriyapostol" /> - приклад використання `DyvoUserBadge` з текстом у тому ж рядку.</p>
-
-<br>
-<DyvoBadge
-  color="info"
-  variant="soft"
-  image="https://github.com/yuriyapostol.png?size=80"
-  size="large"
->Юрій Апостол</DyvoBadge>
-<span> DyvoBadge можна використовувати із зображенням.</span>
-
-<br>
-<DyvoBadge
-  color="tip"
-  variant="soft"
-  image="https://github.com/yuriyapostol.png?size=80"
-  size="large"
->large</DyvoBadge>
-<DyvoBadge
-  color="tip"
-  variant="soft"
-  image="https://github.com/yuriyapostol.png?size=80"
-  size="medium"
->medium</DyvoBadge>
-<DyvoBadge
-  color="tip"
-  variant="soft"
-  image="https://github.com/yuriyapostol.png?size=80"
-  size="small"
->small</DyvoBadge>
+Нижче наведено типові поєднання кольорів і варіантів:
 
 <style>
 .badge-matrix tr:nth-child(2n) {
@@ -205,6 +159,82 @@
 </tbody>
 </table>
 
+Для зворотної сумісності рядкове URL-значення в `image` теж працює, але явний проп для адреси зображення тепер `imageSrc`.
+
+`color`, `variant`, `size` і `verticalAlign` також можна передавати через атрибут `class` із префіксними назвами класів:
+
+```html
+<DyvoBadge class="color-success variant-solid size-medium vertical-align-middle">Вирівняний бейдж</DyvoBadge>
+```
+
+Оформлення бейджа також можна змінювати через CSS-змінні, передані в атрибуті `style`:
+
+<div style="margin: 16px 0;">
+  <DyvoBadge
+    variant="accent"
+    style="--dyvo-badge-current-text-color: #48a103; --dyvo-badge-current-bg-color: #48a10330;"
+  >
+    Кастомний зелений
+  </DyvoBadge>
+</div>
+
+```html
+<DyvoBadge
+  variant="accent"
+  style="--dyvo-badge-current-text-color: #48a103; --dyvo-badge-current-bg-color: #48a10330;"
+>
+  Кастомний зелений
+</DyvoBadge>
+```
+
+## `DyvoUserBadge`
+
+`DyvoUserBadge` обгортає `DyvoBadge` і додає дефолти для користувача або автора.
+
+Він підтримує:
+
+- обов’язковий `name`;
+- опційний GitHub handle у `github`;
+- опційний `href`, який перевизначає посилання;
+- опційні `avatarSrc` і `avatarAlt`;
+- опційний `text` для перевизначення видимого підпису;
+- ті самі `color`, `variant`, `size`, `interactive` і `disabled`, що й `DyvoBadge`.
+
+Якщо передано `github`:
+
+- посиланням за замовчуванням стає `https://github.com/<handle>`;
+- аватаром за замовчуванням стає `https://github.com/<handle>.png?size=80`.
+
+Приклади:
+
+<div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin: 16px 0;">
+  <DyvoUserBadge name="Yuriy Apostol" github="yuriyapostol" />
+  <DyvoUserBadge
+    name="Project maintainer"
+    text="Maintainer"
+    avatar-src="https://github.com/yuriyapostol.png?size=80"
+    href="https://example.com/team/yuriy"
+    color="tip"
+    variant="accent"
+  />
+</div>
+
+```html
+<DyvoUserBadge name="Yuriy Apostol" github="yuriyapostol" />
+<DyvoUserBadge
+  name="Project maintainer"
+  text="Maintainer"
+  avatar-src="https://github.com/yuriyapostol.png?size=80"
+  href="https://example.com/team/yuriy"
+  color="tip"
+  variant="accent"
+/>
+```
+
+`DyvoUserBadge` також зручно використовувати inline, поруч із текстом:
+
+<p style="margin: 12px 0 0;"><DyvoUserBadge name="Юрій Апостол" github="yuriyapostol" /> - приклад використання `DyvoUserBadge` з текстом у тому ж рядку.</p>
+
 ## Порівняння з `Badge` у VitePress
 
 `DyvoBadge` проєктувався так, щоб лишатися сумісним із типовими сценаріями використання стандартного `Badge` з VitePress, але водночас давати ширші можливості стилізації, посилань, розмірів і зображень.
@@ -217,7 +247,7 @@
   API Reference <DyvoBadge color="tip" variant="soft" size="small" text="stable" />
 </div>
 
-```md
+```html
 API Reference <DyvoBadge color="tip" variant="soft" size="small" text="stable" />
 ```
 
@@ -226,7 +256,7 @@ API Reference <DyvoBadge color="tip" variant="soft" size="small" text="stable" /
 - один консистентний стиль бейджів по всьому сайту;
 - сумісність із простими inline-бейджами;
 - більші візуальні варіанти;
-- поведінка клікабельного бейджа;
+- інтерактивна поведінка бейджа;
 - підтримка зображень;
 - явне керування розміром;
 - pill-like компонент, який може стояти окремо в контенті.
@@ -253,17 +283,6 @@ export default theme
 
 Такий wrapper зберігає VitePress-style API з пропом `type` і передає його в `DyvoBadge` через `color`, тому існуючий markdown може й далі використовувати, наприклад:
 
-```md
+```html
 API Reference <Badge type="tip" text="stable" />
 ```
-
-Використовуй `DyvoUserBadge`, коли потрібні:
-
-- аватар;
-- швидка прив’язка до GitHub-профілю;
-- відображення автора або учасника.
-
-Коротко:
-
-- `DyvoBadge` може одночасно виконувати роль і простого inline-бейджа, і більш потужного theme-level бейджа.
-- `DyvoUserBadge` — спеціалізований бейдж автора поверх `DyvoBadge`.

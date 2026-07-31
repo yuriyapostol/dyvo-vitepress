@@ -11,7 +11,7 @@ Because the theme extends the VitePress default theme, the original VitePress `B
 
 `DyvoBadge` and `DyvoUserBadge` are registered globally by the theme, so they can be used directly in markdown and Vue-powered docs pages:
 
-```md
+```html
 <DyvoBadge text="Stable" />
 <DyvoUserBadge name="Yuriy Apostol" github="yuriyapostol" />
 ```
@@ -24,9 +24,10 @@ Because the theme extends the VitePress default theme, the original VitePress `B
 - colors via `color`: `info`, `tip`, `warning`, `danger`, `success`;
 - variants: `soft`, `accent`, `solid`, `outline`, `plain`;
 - sizes: `small`, `medium`, `large`;
-- optional image via the `image` slot and `imageSrc` / `imageAlt`;
+- vertical alignment via `verticalAlign`: `unset`, `baseline`, `middle`, `super`, `sub`;
+- optional image via `imageSrc` / `imageAlt` props or the `image` slot;
 - optional link via `href`;
-- interactive state via `clickable`;
+- interactive state via `interactive`;
 - disabled state via `disabled`.
 
 Example:
@@ -36,23 +37,13 @@ Example:
   <DyvoBadge text="Experimental" color="warning" variant="outline" />
   <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
   <DyvoBadge text="With image" image-src="https://github.com/yuriyapostol.png?size=80" image-alt="Project logo" />
-  <DyvoBadge text="Custom slot" image-alt="Project logo">
-    <template #image>
-      <img src="https://github.com/yuriyapostol.png?size=80" alt="Project logo" />
-    </template>
-  </DyvoBadge>
 </div>
 
-```md
+```html
 <DyvoBadge text="Stable" color="success" variant="soft" />
 <DyvoBadge text="Experimental" color="warning" variant="outline" />
 <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
 <DyvoBadge text="With image" image-src="https://github.com/yuriyapostol.png?size=80" image-alt="Project logo" />
-<DyvoBadge text="Custom slot" image-alt="Project logo">
-  <template #image>
-    <img src="https://github.com/yuriyapostol.png?size=80" alt="Project logo" />
-  </template>
-</DyvoBadge>
 ```
 
 You can also pass the label through the default slot:
@@ -61,94 +52,57 @@ You can also pass the label through the default slot:
   <DyvoBadge color="tip" variant="solid">Featured</DyvoBadge>
 </div>
 
-```md
+```html
 <DyvoBadge color="tip" variant="solid">Featured</DyvoBadge>
 ```
 
-For backward compatibility, string URLs passed through `image` still work, but `imageSrc` is now the explicit prop for image URLs.
+You can add a custom image through the `image` slot:
 
-## `DyvoUserBadge`
-
-`DyvoUserBadge` wraps `DyvoBadge` and adds user-oriented defaults.
-
-It supports:
-
-- required `name`;
-- optional `github` handle;
-- optional `href` override;
-- optional `avatarSrc` and `avatarAlt`;
-- optional `text` override;
-- the same `color`, `variant`, `size`, `clickable`, and `disabled` props as `DyvoBadge`.
-
-If `github` is provided:
-
-- the profile link defaults to `https://github.com/<handle>`;
-- the avatar defaults to `https://github.com/<handle>.png?size=80`.
-
-Examples:
-
-<div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin: 16px 0;">
-  <DyvoUserBadge name="Yuriy Apostol" github="yuriyapostol" />
-  <DyvoUserBadge
-    name="Project maintainer"
-    text="Maintainer"
-    avatar-src="https://github.com/yuriyapostol.png?size=80"
-    href="https://example.com/team/yuriy"
-    color="tip"
-    variant="accent"
-  />
+<div style="margin: 16px 0;">
+  <DyvoBadge text="Custom slot" image-alt="Project logo">
+    <template #image>
+      <img src="https://avatars.githubusercontent.com/u/252810981?s=64&v=4" alt="Project logo" />
+    </template>
+  </DyvoBadge>
 </div>
 
-```md
-<DyvoUserBadge name="Yuriy Apostol" github="yuriyapostol" />
-<DyvoUserBadge
-  name="Project maintainer"
-  text="Maintainer"
-  avatar-src="https://github.com/yuriyapostol.png?size=80"
-  href="https://example.com/team/yuriy"
-  color="tip"
-  variant="accent"
-/>
+```html
+<DyvoBadge text="Custom slot" image-alt="Project logo">
+  <template #image>
+    <img src="https://avatars.githubusercontent.com/u/252810981?s=64&v=4" alt="Project logo" />
+  </template>
+</DyvoBadge>
 ```
 
-## Badge Showcase
+Size options:
 
-# Heading Level 1 <DyvoBadge color="info" variant="solid">h1</DyvoBadge>
+<div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin: 16px 0;">
+  <DyvoBadge size="large" image="https://github.com/yuriyapostol.png?size=80">large</DyvoBadge>
+  <DyvoBadge size="medium" image="https://github.com/yuriyapostol.png?size=80">medium</DyvoBadge>
+  <DyvoBadge size="small" image="https://github.com/yuriyapostol.png?size=80">small</DyvoBadge>
+</div>
 
-## Heading Level 2 <DyvoBadge>h2</DyvoBadge>
+```html
+<DyvoBadge size="large" image="https://github.com/yuriyapostol.png?size=80">large</DyvoBadge>
+<DyvoBadge size="medium" image="https://github.com/yuriyapostol.png?size=80">medium</DyvoBadge>
+<DyvoBadge size="small" image="https://github.com/yuriyapostol.png?size=80">small</DyvoBadge>
+```
 
-### Heading Level 3 <DyvoBadge color="warning">h3</DyvoBadge>
+Compact badges also work well inside headings:
 
-<p><DyvoUserBadge name="Yuriy Apostol" github="yuriyapostol" /> - example of a `DyvoUserBadge` used inline with surrounding text.</p>
+<div style="display:grid; gap:8px; margin:16px 0;">
+  <h1 style="margin:0; padding:0; border:0;">Heading Level 1 <DyvoBadge color="info" variant="solid">h1</DyvoBadge></h1>
+  <h2 style="margin:0; padding:0; border:0;">Heading Level 2 <DyvoBadge>h2</DyvoBadge></h2>
+  <h3 style="margin:0; padding:0; border:0;">Heading Level 3 <DyvoBadge color="warning">h3</DyvoBadge></h3>
+</div>
 
-<br>
-<DyvoBadge
-  color="info"
-  variant="soft"
-  image="https://github.com/yuriyapostol.png?size=80"
-  size="large"
->Yuriy Apostol</DyvoBadge>
-<span> DyvoBadge can be used with an image.</span>
+```html
+# Heading Level 1 <DyvoBadge color="info" variant="solid">h1</DyvoBadge></h1>
+## Heading Level 2 <DyvoBadge>h2</DyvoBadge></h2>
+### Heading Level 3 <DyvoBadge color="warning">h3</DyvoBadge></h3>
+```
 
-<br>
-<DyvoBadge
-  color="tip"
-  variant="soft"
-  image="https://github.com/yuriyapostol.png?size=80"
-  size="large"
->large</DyvoBadge>
-<DyvoBadge
-  color="tip"
-  variant="soft"
-  image="https://github.com/yuriyapostol.png?size=80"
-  size="medium"
->medium</DyvoBadge>
-<DyvoBadge
-  color="tip"
-  variant="soft"
-  image="https://github.com/yuriyapostol.png?size=80"
-  size="small"
->small</DyvoBadge>
+Typical color and variant combinations are shown below:
 
 <style>
 .badge-matrix tr:nth-child(2n) {
@@ -205,6 +159,82 @@ Examples:
 </tbody>
 </table>
 
+For backward compatibility, string URLs passed through `image` still work, but `imageSrc` is now the explicit prop for image URLs.
+
+`color`, `variant`, `size`, and `verticalAlign` can also be provided through the `class` attribute using prefixed class names:
+
+```html
+<DyvoBadge class="color-success variant-solid size-medium vertical-align-middle">Aligned badge</DyvoBadge>
+```
+
+You can also customize badge styling through CSS variables passed via the `style` attribute:
+
+<div style="margin: 16px 0;">
+  <DyvoBadge
+    variant="accent"
+    style="--dyvo-badge-current-text-color: #48a103; --dyvo-badge-current-bg-color: #48a10330;"
+  >
+    Custom green
+  </DyvoBadge>
+</div>
+
+```html
+<DyvoBadge
+  variant="accent"
+  style="--dyvo-badge-current-text-color: #48a103; --dyvo-badge-current-bg-color: #48a10330;"
+>
+  Custom green
+</DyvoBadge>
+```
+
+## `DyvoUserBadge`
+
+`DyvoUserBadge` wraps `DyvoBadge` and adds user-oriented defaults.
+
+It supports:
+
+- required `name`;
+- optional `github` handle;
+- optional `href` override;
+- optional `avatarSrc` and `avatarAlt`;
+- optional `text` override;
+- the same `color`, `variant`, `size`, `interactive`, and `disabled` props as `DyvoBadge`.
+
+If `github` is provided:
+
+- the profile link defaults to `https://github.com/<handle>`;
+- the avatar defaults to `https://github.com/<handle>.png?size=80`.
+
+Examples:
+
+<div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin: 16px 0;">
+  <DyvoUserBadge name="Yuriy Apostol" github="yuriyapostol" />
+  <DyvoUserBadge
+    name="Project maintainer"
+    text="Maintainer"
+    avatar-src="https://github.com/yuriyapostol.png?size=80"
+    href="https://example.com/team/yuriy"
+    color="tip"
+    variant="accent"
+  />
+</div>
+
+```html
+<DyvoUserBadge name="Yuriy Apostol" github="yuriyapostol" />
+<DyvoUserBadge
+  name="Project maintainer"
+  text="Maintainer"
+  avatar-src="https://github.com/yuriyapostol.png?size=80"
+  href="https://example.com/team/yuriy"
+  color="tip"
+  variant="accent"
+/>
+```
+
+`DyvoUserBadge` also works well inline next to surrounding text:
+
+<p style="margin: 12px 0 0;"><DyvoUserBadge name="Yuriy Apostol" github="yuriyapostol" /> - example of a `DyvoUserBadge` used inline with surrounding text.</p>
+
 ## Comparison With VitePress `Badge`
 
 `DyvoBadge` was designed to stay compatible with the default VitePress `Badge` use cases while extending them with richer styling, links, sizing, and optional images.
@@ -217,7 +247,7 @@ If you prefer a single badge component everywhere, use `DyvoBadge` for inline ma
   API Reference <DyvoBadge color="tip" variant="soft" size="small" text="stable" />
 </div>
 
-```md
+```html
 API Reference <DyvoBadge color="tip" variant="soft" size="small" text="stable" />
 ```
 
@@ -226,7 +256,7 @@ Use `DyvoBadge` when you want:
 - one consistent badge style across the site;
 - compatibility with simple inline badge usage;
 - larger visual variants when needed;
-- clickable badge behavior;
+- interactive badge behavior;
 - image support;
 - more explicit sizing;
 - a pill-like component that can stand alone in content blocks.
@@ -253,17 +283,6 @@ export default theme
 
 That wrapper keeps the VitePress-style `type` API and forwards it to `DyvoBadge` via `color`, which lets existing markdown keep using:
 
-```md
+```html
 API Reference <Badge type="tip" text="stable" />
 ```
-
-Use `DyvoUserBadge` when you need:
-
-- avatar rendering;
-- GitHub profile shortcut behavior;
-- author or contributor presentation.
-
-In short:
-
-- `DyvoBadge` can cover both the simple inline badge role and the more advanced theme-level badge role.
-- `DyvoUserBadge` is a specialized author badge built on top of `DyvoBadge`.

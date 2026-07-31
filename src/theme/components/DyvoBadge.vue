@@ -16,14 +16,17 @@ type DyvoBadgeVariant = 'soft' | 'accent' | 'solid' | 'outline' | 'plain'
 
 type DyvoBadgeSize = 'small' | 'medium' | 'large'
 
-type DyvoBadgeState = 'interactive' | 'disabled'
-
 type DyvoBadgeVerticalAlign = 'unset' | 'baseline' | 'middle' | 'super' | 'sub'
 
 const badgeColors = ['info', 'tip', 'warning', 'danger', 'success'] as const
 const badgeVariants = ['soft', 'accent', 'solid', 'outline', 'plain'] as const
 const badgeSizes = ['small', 'medium', 'large'] as const
-const badgeStates = ['interactive', 'disabled'] as const
+const badgeVerticalAlignments = ['unset', 'baseline', 'middle', 'super', 'sub'] as const
+
+const badgeColorClasses = badgeColors.map((value) => `color-${value}`) as readonly string[]
+const badgeVariantClasses = badgeVariants.map((value) => `variant-${value}`) as readonly string[]
+const badgeSizeClasses = badgeSizes.map((value) => `size-${value}`) as readonly string[]
+const badgeVerticalAlignClasses = badgeVerticalAlignments.map((value) => `vertical-align-${value}`) as readonly string[]
 
 const attrs = useAttrs()
 
@@ -37,7 +40,7 @@ const props = withDefaults(defineProps<{
   imageSrc?: string
   imageAlt?: string
   href?: string
-  clickable?: boolean
+  interactive?: boolean
   disabled?: boolean
 }>(), {
   text: '',
@@ -49,7 +52,7 @@ const props = withDefaults(defineProps<{
   imageSrc: '',
   imageAlt: '',
   href: undefined,
-  clickable: false,
+  interactive: false,
   disabled: false
 })
 
@@ -61,37 +64,72 @@ const classTokens = computed(() => {
     .filter(Boolean)
 })
 
-const classColor = computed(() => (
-  classTokens.value.find((token): token is DyvoBadgeColor => (
-    (badgeColors as readonly string[]).includes(token)
+const classConfig = computed(() => {
+  let color: DyvoBadgeColor | undefined
+  let variant: DyvoBadgeVariant | undefined
+  let size: DyvoBadgeSize | undefined
+  let verticalAlign: DyvoBadgeVerticalAlign | undefined
+  let interactive = false
+  let disabled = false
+
+  for (const token of classTokens.value) {
+    if (!color && badgeColorClasses.includes(token)) {
+      color = token.replace(/^color-/, '') as DyvoBadgeColor
+      continue
+    }
+
+    if (!variant && badgeVariantClasses.includes(token)) {
+      variant = token.replace(/^variant-/, '') as DyvoBadgeVariant
+      continue
+    }
+
+    if (!size && badgeSizeClasses.includes(token)) {
+      size = token.replace(/^size-/, '') as DyvoBadgeSize
+      continue
+    }
+
+    if (!verticalAlign && badgeVerticalAlignClasses.includes(token)) {
+      verticalAlign = token.replace(/^vertical-align-/, '') as DyvoBadgeVerticalAlign
+      continue
+    }
+
+    if (token === 'interactive') {
+      interactive = true
+      continue
+    }
+
+    if (token === 'disabled') {
+      disabled = true
+    }
+  }
+
+  return {
+    color,
+    variant,
+    size,
+    verticalAlign,
+    interactive,
+    disabled
+  }
+})
+
+const passthroughClassTokens = computed(() => (
+  classTokens.value.filter((token) => (
+    !badgeColorClasses.includes(token)
+    && !badgeVariantClasses.includes(token)
+    && !badgeSizeClasses.includes(token)
+    && !badgeVerticalAlignClasses.includes(token)
+    && token !== 'interactive'
+    && token !== 'disabled'
   ))
 ))
 
-const classVariant = computed(() => (
-  classTokens.value.find((token): token is DyvoBadgeVariant => (
-    (badgeVariants as readonly string[]).includes(token)
-  ))
-))
-
-const classSize = computed(() => (
-  classTokens.value.find((token): token is DyvoBadgeSize => (
-    (badgeSizes as readonly string[]).includes(token)
-  ))
-))
-
-const classStates = computed(() => (
-  classTokens.value.filter((token): token is DyvoBadgeState => (
-    (badgeStates as readonly string[]).includes(token)
-  ))
-))
-
-const resolvedColor = computed(() => classColor.value ?? props.color)
-const resolvedVariant = computed(() => classVariant.value ?? props.variant)
-const resolvedSize = computed(() => classSize.value ?? props.size)
-const resolvedDisabled = computed(() => (
-  classStates.value.includes('disabled') || props.disabled
-))
-const forcedInteractive = computed(() => classStates.value.includes('interactive'))
+const resolvedColor = computed(() => classConfig.value.color ?? props.color)
+const resolvedVariant = computed(() => classConfig.value.variant ?? props.variant)
+const resolvedSize = computed(() => classConfig.value.size ?? props.size)
+const resolvedVerticalAlign = computed(() => classConfig.value.verticalAlign ?? props.verticalAlign)
+const resolvedDisabled = computed(() => classConfig.value.disabled || props.disabled)
+const forcedInteractive = computed(() => classConfig.value.interactive)
 
 const forwardedAttrs = computed(() => {
   const { class: _class, ...rest } = attrs
@@ -107,7 +145,7 @@ const tagName = computed(() => {
 })
 
 const isInteractive = computed(() => (
-  (Boolean(props.href) || props.clickable || forcedInteractive.value) && !resolvedDisabled.value
+  (Boolean(props.href) || props.interactive || forcedInteractive.value) && !resolvedDisabled.value
 ))
 
 const resolvedImageSrc = computed(() => {
@@ -129,10 +167,11 @@ const resolvedImageSrc = computed(() => {
     v-bind="forwardedAttrs"
     class="dyvo-badge"
     :class="[
-      resolvedColor,
-      resolvedVariant,
-      resolvedSize,
-      `vertical-align-${verticalAlign}`,
+      passthroughClassTokens,
+      `color-${resolvedColor}`,
+      `variant-${resolvedVariant}`,
+      `size-${resolvedSize}`,
+      `vertical-align-${resolvedVerticalAlign}`,
       {
         interactive: isInteractive,
         disabled: resolvedDisabled
@@ -189,7 +228,7 @@ a.dyvo-badge:hover {
   );
 }
 
-.dyvo-badge.small {
+.dyvo-badge.size-small {
   --dyvo-badge-padding-x: var(--dyvo-badge-small-padding-x, 10px);
   --dyvo-badge-padding-y: var(--dyvo-badge-small-padding-y, 0);
   --dyvo-badge-gap: var(--dyvo-badge-small-gap, 5px);
@@ -199,7 +238,7 @@ a.dyvo-badge:hover {
   --dyvo-badge-font-weight: var(--dyvo-badge-small-font-weight, 500);
 }
 
-.dyvo-badge.medium {
+.dyvo-badge.size-medium {
   --dyvo-badge-padding-x: var(--dyvo-badge-medium-padding-x, 12px);
   --dyvo-badge-padding-y: var(--dyvo-badge-medium-padding-y, 0);
   --dyvo-badge-gap: var(--dyvo-badge-medium-gap, 6px);
@@ -209,7 +248,7 @@ a.dyvo-badge:hover {
   --dyvo-badge-font-weight: var(--dyvo-badge-medium-font-weight, 400);
 }
 
-.dyvo-badge.large {
+.dyvo-badge.size-large {
   --dyvo-badge-padding-x: var(--dyvo-badge-large-padding-x, 14px);
   --dyvo-badge-padding-y: var(--dyvo-badge-large-padding-y, 0);
   --dyvo-badge-gap: var(--dyvo-badge-large-gap, 8px);
@@ -333,31 +372,31 @@ a.dyvo-badge:hover {
   text-underline-offset: inherit;
 }
 
-.dyvo-badge.soft {
+.dyvo-badge.variant-soft {
   --dyvo-badge-text-color: var(--dyvo-badge-soft-text-color, var(--vp-c-text-1));
   --dyvo-badge-bg-color: var(--dyvo-badge-soft-bg-color, transparent);
   --dyvo-badge-border-color: var(--dyvo-badge-soft-border-color, transparent);
 }
 
-.dyvo-badge.accent {
+.dyvo-badge.variant-accent {
   --dyvo-badge-text-color: var(--dyvo-badge-accent-text-color, var(--dyvo-badge-soft-text-color, var(--vp-c-text-1)));
   --dyvo-badge-bg-color: var(--dyvo-badge-accent-bg-color, var(--dyvo-badge-soft-bg-color, transparent));
   --dyvo-badge-border-color: var(--dyvo-badge-accent-border-color, var(--dyvo-badge-outline-border-color, var(--dyvo-badge-accent-text-color, transparent)));
 }
 
-.dyvo-badge.solid {
+.dyvo-badge.variant-solid {
   --dyvo-badge-text-color: var(--dyvo-badge-solid-text-color, var(--vp-c-bg));
   --dyvo-badge-bg-color: var(--dyvo-badge-solid-bg-color, var(--vp-c-text-1));
   --dyvo-badge-border-color: var(--dyvo-badge-solid-border-color, var(--dyvo-badge-solid-bg-color, transparent));
 }
 
-.dyvo-badge.outline {
+.dyvo-badge.variant-outline {
   --dyvo-badge-text-color: var(--dyvo-badge-outline-text-color, var(--vp-c-text-1));
   --dyvo-badge-bg-color: var(--dyvo-badge-outline-bg-color, transparent);
   --dyvo-badge-border-color: var(--dyvo-badge-outline-border-color, var(--dyvo-badge-outline-text-color, transparent));
 }
 
-.dyvo-badge.plain {
+.dyvo-badge.variant-plain {
   --dyvo-badge-border-width: 0px;
   --dyvo-badge-radius: 0px;
   --dyvo-badge-padding-x: 0px;
@@ -367,11 +406,11 @@ a.dyvo-badge:hover {
   --dyvo-badge-border-color: var(--dyvo-badge-plain-border-color, transparent);
 }
 
-.dyvo-badge.plain .dyvo-badge-label.has-image {
+.dyvo-badge.variant-plain .dyvo-badge-label.has-image {
   padding-inline-start: 0;
 }
 
-.dyvo-badge.plain .dyvo-badge-label.has-image .dyvo-badge-body {
+.dyvo-badge.variant-plain .dyvo-badge-label.has-image .dyvo-badge-body {
   padding-inline-start: var(--dyvo-badge-image-space);
 }
 
@@ -379,7 +418,7 @@ a.dyvo-badge:hover {
   padding-inline-start: var(--dyvo-badge-image-space);
 }
 
-.dyvo-badge.info {
+.dyvo-badge.color-info {
   --dyvo-badge-current-text-color: var(--dyvo-badge-info-text-color, var(--vp-c-text-1));
   --dyvo-badge-current-bg-color: var(--dyvo-badge-info-bg-color, var(--vp-c-text-soft, var(--vp-c-default-soft)));
   --dyvo-badge-soft-text-color: var(--dyvo-badge-info-soft-text-color, var(--dyvo-badge-current-text-color));
@@ -399,7 +438,7 @@ a.dyvo-badge:hover {
   --dyvo-badge-plain-border-color: var(--dyvo-badge-info-plain-border-color, transparent);
 }
 
-.dyvo-badge.tip {
+.dyvo-badge.color-tip {
   --dyvo-badge-current-text-color: var(--dyvo-badge-tip-text-color, var(--vp-c-tip-1));
   --dyvo-badge-current-bg-color: var(--dyvo-badge-tip-bg-color, var(--vp-c-tip-soft));
   --dyvo-badge-soft-text-color: var(--dyvo-badge-tip-soft-text-color, var(--dyvo-badge-current-text-color));
@@ -419,7 +458,7 @@ a.dyvo-badge:hover {
   --dyvo-badge-plain-border-color: var(--dyvo-badge-tip-plain-border-color, transparent);
 }
 
-.dyvo-badge.warning {
+.dyvo-badge.color-warning {
   --dyvo-badge-current-text-color: var(--dyvo-badge-warning-text-color, var(--vp-c-warning-1));
   --dyvo-badge-current-bg-color: var(--dyvo-badge-warning-bg-color, var(--vp-c-warning-soft));
   --dyvo-badge-soft-text-color: var(--dyvo-badge-warning-soft-text-color, var(--dyvo-badge-current-text-color));
@@ -439,7 +478,7 @@ a.dyvo-badge:hover {
   --dyvo-badge-plain-border-color: var(--dyvo-badge-warning-plain-border-color, transparent);
 }
 
-.dyvo-badge.danger {
+.dyvo-badge.color-danger {
   --dyvo-badge-current-text-color: var(--dyvo-badge-danger-text-color, var(--vp-c-danger-1));
   --dyvo-badge-current-bg-color: var(--dyvo-badge-danger-bg-color, var(--vp-c-danger-soft));
   --dyvo-badge-soft-text-color: var(--dyvo-badge-danger-soft-text-color, var(--dyvo-badge-current-text-color));
@@ -459,7 +498,7 @@ a.dyvo-badge:hover {
   --dyvo-badge-plain-border-color: var(--dyvo-badge-danger-plain-border-color, transparent);
 }
 
-.dyvo-badge.success {
+.dyvo-badge.color-success {
   --dyvo-badge-current-text-color: var(--dyvo-badge-success-text-color, var(--vp-c-success-1));
   --dyvo-badge-current-bg-color: var(--dyvo-badge-success-bg-color, var(--vp-c-success-soft));
   --dyvo-badge-soft-text-color: var(--dyvo-badge-success-soft-text-color, var(--dyvo-badge-current-text-color));

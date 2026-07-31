@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<{
   color?: 'info' | 'tip' | 'warning' | 'danger' | 'success'
   variant?: 'soft' | 'accent' | 'solid' | 'outline' | 'plain'
   size?: 'small' | 'medium' | 'large'
-  clickable?: boolean
+  interactive?: boolean
   disabled?: boolean
 }>(), {
   github: undefined,
@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<{
   color: 'info',
   variant: 'soft',
   size: 'large',
-  clickable: false,
+  interactive: false,
   disabled: false
 })
 
@@ -82,7 +82,7 @@ const resolvedText = computed(() => {
     :image-src="resolvedAvatarSrc"
     :image-alt="resolvedAvatarAlt"
     :href="resolvedHref"
-    :clickable="clickable"
+    :interactive="interactive"
     :disabled="disabled"
   />
 </template>
