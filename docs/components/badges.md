@@ -215,7 +215,7 @@ Examples:
     avatar-src="https://github.com/yuriyapostol.png?size=80"
     href="https://example.com/team/yuriy"
     color="tip"
-    variant="accent"
+    variant="solid"
   />
 </div>
 
@@ -227,13 +227,9 @@ Examples:
   avatar-src="https://github.com/yuriyapostol.png?size=80"
   href="https://example.com/team/yuriy"
   color="tip"
-  variant="accent"
+  variant="solid"
 />
 ```
-
-`DyvoUserBadge` also works well inline next to surrounding text:
-
-<p style="margin: 12px 0 0;"><DyvoUserBadge name="Yuriy Apostol" github="yuriyapostol" /> - example of a `DyvoUserBadge` used inline with surrounding text.</p>
 
 ## Comparison With VitePress `Badge`
 

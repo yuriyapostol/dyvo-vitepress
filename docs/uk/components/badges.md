@@ -56,20 +56,44 @@
 <DyvoBadge color="tip" variant="solid">Рекомендовано</DyvoBadge>
 ```
 
-Кастомне зображення через слот `image`:
+Передати зображення через слот `image` у вигляді тегу `img`:
 
 <div style="margin: 16px 0;">
-  <DyvoBadge text="Кастомний слот" image-alt="Логотип проєкту">
+  <DyvoBadge text="Слот з img" image-alt="Логотип проєкту">
     <template #image>
-      <img src="https://avatars.githubusercontent.com/u/252810981?s=64&v=4" alt="Логотип проєкту" />
+      <img src="/images/simple-logo.svg" alt="Логотип проєкту" />
     </template>
   </DyvoBadge>
 </div>
 
 ```html
-<DyvoBadge text="Кастомний слот" image-alt="Логотип проєкту">
+<DyvoBadge text="Слот з img" image-alt="Логотип проєкту">
   <template #image>
-    <img src="https://avatars.githubusercontent.com/u/252810981?s=64&v=4" alt="Логотип проєкту" />
+    <img src="/images/simple-logo.svg" alt="Логотип проєкту" />
+  </template>
+</DyvoBadge>
+```
+
+Або, наприклад, коду SVG:
+
+<div style="margin: 16px 0;">
+  <DyvoBadge text="Слот з SVG" image-alt="Логотип проєкту">
+    <template #image>
+      <svg width="32" height="32" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <rect style="fill:#4400aa" width="32" height="32" x="0" y="0" />
+        <path style="fill:none;stroke:#ffffff;stroke-width:2.52;stroke-linecap:butt;stroke-linejoin:bevel" d="m -1.0978942,17.991324 c 10.3148113,1.663511 11.8259462,-6.525645 19.7029652,-3.995225 -2.516126,-0.898775 -8.580151,-1.224087 -8.496544,6.212089 0.02532,2.259723 1.727747,4.948781 5.290295,4.248272 1.234768,-0.242797 2.821112,-1.341713 3.063584,-3.227845 C 19.004469,17.012022 19.377112,11.24108 20.7292,4.6980033 19.377864,11.220191 19.083461,16.14399 18.46479,21.270261 c -0.503841,2.719424 1.795631,3.583091 4.42593,3.24533 2.674227,-0.343408 4.954594,-2.688828 9.650598,-3.899747" />
+      </svg>
+    </template>
+  </DyvoBadge>
+</div>
+
+```html
+<DyvoBadge text="Слот з SVG" image-alt="Логотип проєкту">
+  <template #image>
+    <svg width="32" height="32" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <rect style="fill:#4400aa" width="32" height="32" x="0" y="0" />
+      <path style="fill:none;stroke:#ffffff;stroke-width:2.52;stroke-linecap:butt;stroke-linejoin:bevel" d="m -1.0978942,17.991324 c 10.3148113,1.663511 11.8259462,-6.525645 19.7029652,-3.995225 -2.516126,-0.898775 -8.580151,-1.224087 -8.496544,6.212089 0.02532,2.259723 1.727747,4.948781 5.290295,4.248272 1.234768,-0.242797 2.821112,-1.341713 3.063584,-3.227845 C 19.004469,17.012022 19.377112,11.24108 20.7292,4.6980033 19.377864,11.220191 19.083461,16.14399 18.46479,21.270261 c -0.503841,2.719424 1.795631,3.583091 4.42593,3.24533 2.674227,-0.343408 4.954594,-2.688828 9.650598,-3.899747" />
+    </svg>
   </template>
 </DyvoBadge>
 ```
@@ -215,7 +239,7 @@
     avatar-src="https://github.com/yuriyapostol.png?size=80"
     href="https://example.com/team/yuriy"
     color="tip"
-    variant="accent"
+    variant="solid"
   />
 </div>
 
@@ -227,13 +251,9 @@
   avatar-src="https://github.com/yuriyapostol.png?size=80"
   href="https://example.com/team/yuriy"
   color="tip"
-  variant="accent"
+  variant="solid"
 />
 ```
-
-`DyvoUserBadge` також зручно використовувати inline, поруч із текстом:
-
-<p style="margin: 12px 0 0;"><DyvoUserBadge name="Юрій Апостол" github="yuriyapostol" /> - приклад використання `DyvoUserBadge` з текстом у тому ж рядку.</p>
 
 ## Порівняння з `Badge` у VitePress
 
