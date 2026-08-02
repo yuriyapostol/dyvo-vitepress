@@ -1,20 +1,13 @@
 # Badges
 
-The theme provides two custom badge components:
+The `dyvo-vitepress-theme` package provides two custom badge components:
 
-- `DyvoBadge` for generic labeled badges with variants, sizes, optional image slot, and optional link behavior.
-- `DyvoUserBadge` for person or contributor badges with a name, avatar, and optional GitHub profile integration.
+- `DyvoBadge` for universal, flexibly configurable badges.
+- `DyvoUserBadge` for user or content author badges with optional GitHub profile integration.
 
-Because the theme extends the VitePress default theme, the original VitePress `Badge` remains available too.
+These components are registered globally by the theme, so they can be used directly in markdown and Vue-powered docs pages.
 
-## Availability
-
-`DyvoBadge` and `DyvoUserBadge` are registered globally by the theme, so they can be used directly in markdown and Vue-powered docs pages:
-
-```html
-<DyvoBadge text="Stable" />
-<DyvoUserBadge name="Yuriy Apostol" github="yuriyapostol" />
-```
+Because the package extends the VitePress default theme, the original VitePress `Badge` remains available too.
 
 ## `DyvoBadge`
 
@@ -56,20 +49,44 @@ You can also pass the label through the default slot:
 <DyvoBadge color="tip" variant="solid">Featured</DyvoBadge>
 ```
 
-You can add a custom image through the `image` slot:
+You can add a custom image through the `image` slot using an `img` tag:
 
 <div style="margin: 16px 0;">
-  <DyvoBadge text="Custom slot" image-alt="Project logo">
+  <DyvoBadge text="Image slot" image-alt="Project logo">
     <template #image>
-      <img src="https://avatars.githubusercontent.com/u/252810981?s=64&v=4" alt="Project logo" />
+      <img src="/images/simple-logo.svg" alt="Project logo" />
     </template>
   </DyvoBadge>
 </div>
 
 ```html
-<DyvoBadge text="Custom slot" image-alt="Project logo">
+<DyvoBadge text="Image slot" image-alt="Project logo">
   <template #image>
-    <img src="https://avatars.githubusercontent.com/u/252810981?s=64&v=4" alt="Project logo" />
+    <img src="/images/simple-logo.svg" alt="Project logo" />
+  </template>
+</DyvoBadge>
+```
+
+Or, for example, inline SVG code:
+
+<div style="margin: 16px 0;">
+  <DyvoBadge text="SVG slot" image-alt="Project logo">
+    <template #image>
+      <svg width="32" height="32" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <rect style="fill:#4400aa" width="32" height="32" x="0" y="0" />
+        <path style="fill:none;stroke:#ffffff;stroke-width:2.52;stroke-linecap:butt;stroke-linejoin:bevel" d="m -1.0978942,17.991324 c 10.3148113,1.663511 11.8259462,-6.525645 19.7029652,-3.995225 -2.516126,-0.898775 -8.580151,-1.224087 -8.496544,6.212089 0.02532,2.259723 1.727747,4.948781 5.290295,4.248272 1.234768,-0.242797 2.821112,-1.341713 3.063584,-3.227845 C 19.004469,17.012022 19.377112,11.24108 20.7292,4.6980033 19.377864,11.220191 19.083461,16.14399 18.46479,21.270261 c -0.503841,2.719424 1.795631,3.583091 4.42593,3.24533 2.674227,-0.343408 4.954594,-2.688828 9.650598,-3.899747" />
+      </svg>
+    </template>
+  </DyvoBadge>
+</div>
+
+```html
+<DyvoBadge text="SVG slot" image-alt="Project logo">
+  <template #image>
+    <svg width="32" height="32" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <rect style="fill:#4400aa" width="32" height="32" x="0" y="0" />
+      <path style="fill:none;stroke:#ffffff;stroke-width:2.52;stroke-linecap:butt;stroke-linejoin:bevel" d="m -1.0978942,17.991324 c 10.3148113,1.663511 11.8259462,-6.525645 19.7029652,-3.995225 -2.516126,-0.898775 -8.580151,-1.224087 -8.496544,6.212089 0.02532,2.259723 1.727747,4.948781 5.290295,4.248272 1.234768,-0.242797 2.821112,-1.341713 3.063584,-3.227845 C 19.004469,17.012022 19.377112,11.24108 20.7292,4.6980033 19.377864,11.220191 19.083461,16.14399 18.46479,21.270261 c -0.503841,2.719424 1.795631,3.583091 4.42593,3.24533 2.674227,-0.343408 4.954594,-2.688828 9.650598,-3.899747" />
+    </svg>
   </template>
 </DyvoBadge>
 ```
@@ -88,7 +105,7 @@ Size options:
 <DyvoBadge size="small" image="/images/logo.svg">small</DyvoBadge>
 ```
 
-Compact badges also work well inside headings:
+Dyvo badges also work well inside headings, with middle vertical alignment by default:
 
 <div style="display:grid; gap:8px; margin:16px 0;">
   <h1 style="margin:0; padding:0; border:0;">Heading Level 1 <DyvoBadge color="info" variant="solid">h1</DyvoBadge></h1>
@@ -97,9 +114,28 @@ Compact badges also work well inside headings:
 </div>
 
 ```html
-# Heading Level 1 <DyvoBadge color="info" variant="solid">h1</DyvoBadge></h1>
-## Heading Level 2 <DyvoBadge>h2</DyvoBadge></h2>
-### Heading Level 3 <DyvoBadge color="warning">h3</DyvoBadge></h3>
+# Heading Level 1 <DyvoBadge color="info" variant="solid">h1</DyvoBadge>
+## Heading Level 2 <DyvoBadge>h2</DyvoBadge>
+### Heading Level 3 <DyvoBadge color="warning">h3</DyvoBadge>
+```
+
+And in text blocks, with baseline alignment by default:
+
+<div style="display:grid; gap:12px; margin:16px 0;">
+  <p style="margin:0;">
+    <DyvoBadge size="large" color="tip" variant="soft">large</DyvoBadge>
+    This large badge aligns to the text baseline inside a paragraph.
+  </p>
+  <p style="margin:0;">
+    In regular text, a <DyvoBadge color="info" variant="solid">medium</DyvoBadge> badge also stays naturally aligned.
+  </p>
+</div>
+
+```html
+<DyvoBadge size="large" color="tip" variant="soft">large</DyvoBadge>
+This large badge aligns to the text baseline inside a paragraph.
+
+In regular text, a <DyvoBadge color="info" variant="solid">medium</DyvoBadge> badge also stays naturally aligned.
 ```
 
 Typical color and variant combinations are shown below:
@@ -158,8 +194,6 @@ Typical color and variant combinations are shown below:
 </tr>
 </tbody>
 </table>
-
-For backward compatibility, string URLs passed through `image` still work, but `imageSrc` is now the explicit prop for image URLs.
 
 `color`, `variant`, `size`, and `verticalAlign` can also be provided through the `class` attribute using prefixed class names:
 
@@ -264,7 +298,7 @@ The package exports a `Badge` wrapper component for that purpose, but it is not 
 ```ts
 import DefaultTheme from 'vitepress/theme'
 import type { Theme } from 'vitepress'
-import { Badge, theme as dyvoTheme } from '@yuriyapostol/dyvo-vitepress'
+import { Badge, theme as dyvoTheme } from '@yuriyapostol/dyvo-vitepress-theme'
 
 const theme: Theme = {
   extends: dyvoTheme,

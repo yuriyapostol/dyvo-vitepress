@@ -1,20 +1,13 @@
 # Бейджі
 
-Тема надає два кастомні компоненти бейджів:
+Пакет `dyvo-vitepress-theme` надає два кастомні компоненти бейджів:
 
-- `DyvoBadge` для універсальних бейджів з підписом, варіантами оформлення, розмірами, опційним слотом зображення і посиланням.
-- `DyvoUserBadge` для бейджів користувача або автора з ім’ям, аватаром і опційною інтеграцією з GitHub-профілем.
+- `DyvoBadge` для універсальних, гнучко налаштовуваних бейджів.
+- `DyvoUserBadge` для бейджів користувача або автора матеріалу і опційною інтеграцією з GitHub-профілем.
 
-Оскільки тема розширює стандартну тему VitePress, оригінальний `Badge` з VitePress теж лишається доступним.
+Ці компоненти глобально реєструються темою, тому їх можна напряму використовувати в markdown і на Vue-сторінках документації.
 
-## Доступність
-
-`DyvoBadge` і `DyvoUserBadge` глобально реєструються темою, тому їх можна напряму використовувати в markdown і на Vue-сторінках документації:
-
-```html
-<DyvoBadge text="Стабільно" />
-<DyvoUserBadge name="Yuriy Apostol" github="yuriyapostol" />
-```
+Оскільки пакет розширює стандартну тему VitePress, оригінальний `Badge` з VitePress теж лишається доступним.
 
 ## `DyvoBadge`
 
@@ -112,7 +105,7 @@
 <DyvoBadge size="small" image="/images/logo.svg">small</DyvoBadge>
 ```
 
-Компактні бейджі також добре працюють у заголовках:
+Dyvo-бейджі також добре працюють у заголовках, з вертикальним вирівнюванням по центру за замовчуванням:
 
 <div style="display:grid; gap:8px; margin:16px 0;">
   <h1 style="margin:0; padding:0; border:0;">Заголовок першого рівня <DyvoBadge color="info" variant="solid">h1</DyvoBadge></h1>
@@ -124,6 +117,25 @@
 # Заголовок першого рівня <DyvoBadge color="info" variant="solid">h1</DyvoBadge>
 ## Заголовок другого рівня <DyvoBadge>h2</DyvoBadge>
 ### Заголовок третього рівня <DyvoBadge color="warning">h3</DyvoBadge>
+```
+
+І в текстових блоках, з baseline вирівнюванням за замовчуванням:
+
+<div style="display:grid; gap:12px; margin:16px 0;">
+  <p style="margin:0;">
+    <DyvoBadge size="large" color="tip" variant="soft">large</DyvoBadge>
+    Цей великий бейдж вирівнюється по базовій лінії тексту в абзаці.
+  </p>
+  <p style="margin:0;">
+    У звичайному тексті <DyvoBadge color="info" variant="solid">medium</DyvoBadge> бейдж теж лишається природно вирівняним.
+  </p>
+</div>
+
+```html
+<DyvoBadge size="large" color="tip" variant="soft">large</DyvoBadge>
+Цей великий бейдж вирівнюється по базовій лінії тексту в абзаці.
+
+У звичайному тексті <DyvoBadge color="info" variant="solid">medium</DyvoBadge> бейдж теж лишається природно вирівняним.
 ```
 
 Нижче наведено типові поєднання кольорів і варіантів:
@@ -182,8 +194,6 @@
 </tr>
 </tbody>
 </table>
-
-Для зворотної сумісності рядкове URL-значення в `image` теж працює, але явний проп для адреси зображення тепер `imageSrc`.
 
 `color`, `variant`, `size` і `verticalAlign` також можна передавати через атрибут `class` із префіксними назвами класів:
 
@@ -288,7 +298,7 @@ API Reference <DyvoBadge color="tip" variant="soft" size="small" text="stable" /
 ```ts
 import DefaultTheme from 'vitepress/theme'
 import type { Theme } from 'vitepress'
-import { Badge, theme as dyvoTheme } from '@yuriyapostol/dyvo-vitepress'
+import { Badge, theme as dyvoTheme } from '@yuriyapostol/dyvo-vitepress-theme'
 
 const theme: Theme = {
   extends: dyvoTheme,

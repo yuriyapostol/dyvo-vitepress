@@ -4,7 +4,7 @@
 Чернетка.
 
 ## Призначення
-`@yuriyapostol/dyvo-vitepress` — це повторно використовуваний пакет для сайтів на базі VitePress.
+`@yuriyapostol/dyvo-vitepress-theme` — це повторно використовуваний пакет для сайтів на базі VitePress.
 Він має надавати:
 
 - повторно використовуваний шар теми поверх VitePress;
@@ -151,10 +151,10 @@ src/
 
 Можливі entry points:
 
-- `@yuriyapostol/dyvo-vitepress`
-- `@yuriyapostol/dyvo-vitepress/theme`
-- `@yuriyapostol/dyvo-vitepress/features/news`
-- `@yuriyapostol/dyvo-vitepress/features/comments`
+- `@yuriyapostol/dyvo-vitepress-theme`
+- `@yuriyapostol/dyvo-vitepress-theme/theme`
+- `@yuriyapostol/dyvo-vitepress-theme/features/news`
+- `@yuriyapostol/dyvo-vitepress-theme/features/comments`
 
 Subpath exports варто додавати лише тоді, коли для них з’явиться реальна потреба.
 
@@ -264,4 +264,4 @@ docs/
 - Пакет має офіційно підтримувати ту саму мінорну гілку VitePress, що й сайт-споживач, а зараз це `^1.6.4`.
 
 ## Безпосередній наступний крок
-Використовувати цю специфікацію як джерело істини для scaffolding пакета і для винесення коду з `dyvoshkola.github.io` у `dyvo-vitepress`.
+Використовувати цю специфікацію як джерело істини для scaffolding пакета і для винесення коду з `dyvoshkola.github.io` у `dyvo-vitepress-theme`.

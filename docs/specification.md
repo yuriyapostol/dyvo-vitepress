@@ -1,10 +1,10 @@
-# dyvo-vitepress: specification
+# dyvo-vitepress-theme: specification
 
 ## Status
 Draft.
 
 ## Purpose
-`@yuriyapostol/dyvo-vitepress` is a reusable package for VitePress-based sites.
+`@yuriyapostol/dyvo-vitepress-theme` is a reusable package for VitePress-based sites.
 It should provide:
 - a reusable theme layer on top of VitePress;
 - reusable UI components and content features;
@@ -141,10 +141,10 @@ Current decision:
 - Keep the export surface minimal and use `theme`, `createConfig`, and `defineThemeConfig` as the primary package API.
 
 Possible entry points:
-- `@yuriyapostol/dyvo-vitepress`
-- `@yuriyapostol/dyvo-vitepress/theme`
-- `@yuriyapostol/dyvo-vitepress/features/news`
-- `@yuriyapostol/dyvo-vitepress/features/comments`
+- `@yuriyapostol/dyvo-vitepress-theme`
+- `@yuriyapostol/dyvo-vitepress-theme/theme`
+- `@yuriyapostol/dyvo-vitepress-theme/features/news`
+- `@yuriyapostol/dyvo-vitepress-theme/features/comments`
 
 Subpath exports should be added only when there is a real consumer need.
 
@@ -247,4 +247,4 @@ Default strategy:
 - The package should officially support the same VitePress minor line as the consuming site, currently `^1.6.4`.
 
 ## Immediate next step
-Use this specification as the source of truth for scaffolding the package and for extracting code from `dyvoshkola.github.io` into `dyvo-vitepress`.
+Use this specification as the source of truth for scaffolding the package and for extracting code from `dyvoshkola.github.io` into `dyvo-vitepress-theme`.
