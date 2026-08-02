@@ -1,4 +1,4 @@
-# dyvo-vitepress
+# dyvo-vitepress-theme
 
 Пакет із повторно використовуваною темою, фічами та утилітами для VitePress.
 

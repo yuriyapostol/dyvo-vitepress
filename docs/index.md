@@ -1,4 +1,4 @@
-# dyvo-vitepress
+# dyvo-vitepress-theme
 
 Reusable VitePress theme, features, and utilities.
 

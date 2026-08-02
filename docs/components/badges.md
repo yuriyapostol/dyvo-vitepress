@@ -28,14 +28,14 @@ Example:
 <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin: 16px 0;">
   <DyvoBadge text="Stable" color="success" variant="soft" />
   <DyvoBadge text="Experimental" color="warning" variant="outline" />
-  <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
+  <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress-theme" />
   <DyvoBadge text="With image" image-src="/images/logo.svg" image-alt="Project logo" />
 </div>
 
 ```html
 <DyvoBadge text="Stable" color="success" variant="soft" />
 <DyvoBadge text="Experimental" color="warning" variant="outline" />
-<DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
+<DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress-theme" />
 <DyvoBadge text="With image" image-src="/images/logo.svg" image-alt="Project logo" />
 ```
 

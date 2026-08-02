@@ -1,4 +1,4 @@
-# dyvo-vitepress
+# dyvo-vitepress-theme
 
 Reusable VitePress theme, features, and utilities.
 
@@ -34,11 +34,11 @@ Primary exports:
 
 Config-safe subpath exports:
 
-- `@yuriyapostol/dyvo-vitepress/config`
-- `@yuriyapostol/dyvo-vitepress/theme/config`
-- `@yuriyapostol/dyvo-vitepress/shared/i18n`
-- `@yuriyapostol/dyvo-vitepress/features/comments`
-- `@yuriyapostol/dyvo-vitepress/features/news`
+- `@yuriyapostol/dyvo-vitepress-theme/config`
+- `@yuriyapostol/dyvo-vitepress-theme/theme/config`
+- `@yuriyapostol/dyvo-vitepress-theme/shared/i18n`
+- `@yuriyapostol/dyvo-vitepress-theme/features/comments`
+- `@yuriyapostol/dyvo-vitepress-theme/features/news`
 
 Use the config-safe subpath exports from VitePress config files when you need to avoid importing `.vue` files during Node-side config loading.
 

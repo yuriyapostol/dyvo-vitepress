@@ -28,14 +28,14 @@
 <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin: 16px 0;">
   <DyvoBadge text="Стабільно" color="success" variant="soft" />
   <DyvoBadge text="Експериментально" color="warning" variant="outline" />
-  <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
+  <DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress-theme" />
   <DyvoBadge text="З зображенням" image-src="/images/logo.svg" image-alt="Логотип проєкту" />
 </div>
 
 ```html
 <DyvoBadge text="Стабільно" color="success" variant="soft" />
 <DyvoBadge text="Експериментально" color="warning" variant="outline" />
-<DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress" />
+<DyvoBadge text="GitHub" color="info" variant="accent" href="https://github.com/yuriyapostol/dyvo-vitepress-theme" />
 <DyvoBadge text="З зображенням" image-src="/images/logo.svg" image-alt="Логотип проєкту" />
 ```
 

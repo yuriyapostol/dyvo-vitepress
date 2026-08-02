@@ -1,6 +1,6 @@
 # Getting Started
 
-`dyvo-vitepress` is a reusable package for VitePress-based sites.
+`dyvo-vitepress-theme` is a reusable package for VitePress-based sites.
 
 The package is intended to provide:
 
