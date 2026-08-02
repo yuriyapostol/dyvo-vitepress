@@ -1,8 +1,8 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  base: '/dyvo-vitepress/',
-  title: 'dyvo-vitepress',
+  base: '/dyvo-vitepress-theme/',
+  title: 'dyvo-vitepress-theme',
   description: 'Reusable VitePress theme, features, and utilities',
   lang: 'en-US',
   cleanUrls: true,
